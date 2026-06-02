@@ -1,0 +1,10 @@
+#BlueJ class context
+comment0.target=ListaDuplamenteLigada
+comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ ListaDuplamenteLigada\ aqui.\r\n\ \r\n\ @author\ Arthur\ Daniel\r\n\ @version\ 2026/06/02\ (YYYY/MM/DD)\r\n
+comment1.params=
+comment1.target=ListaDuplamenteLigada()
+comment2.params=
+comment2.target=boolean\ checarListaVazia()
+comment3.params=valor
+comment3.target=void\ adicionarFim(java.lang.Object)
+numComments=4
