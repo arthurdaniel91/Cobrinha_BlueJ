@@ -2,7 +2,7 @@ package pkgListaDuplamenteLigada;
 import pkgVector.Vector2;
 
 /**
- * Escreva uma descrição da classe Celula aqui.
+ * Escreva uma descrição da classe No aqui.
  * 
  * @author Arthur Daniel 
  * @version 2026/06/02 (YYYY/MM/DD)
