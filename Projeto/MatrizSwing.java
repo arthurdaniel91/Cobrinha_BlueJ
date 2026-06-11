@@ -17,10 +17,7 @@ public class MatrizSwing implements KeyListener{
     private int tamanho;
     
     private JFrame janelaPrincipal;
-    
     private JPanel matrizCelulas;
-    
-    private JLabel labelCelula;
     
     public MatrizSwing(ListaDuplamenteLigada lista, int tamanho){
         this.lista = lista;
@@ -36,29 +33,30 @@ public class MatrizSwing implements KeyListener{
         matrizCelulas.setLayout(new GridLayout(tamanho, tamanho));
         janelaPrincipal.add(matrizCelulas);
         
+        JLabel labelCelula;
+        
         for (int i = 0; i < tamanho; i++){
             for (int j = 0; j < tamanho; j++){
-                Vector3 cor;
+                EstadoCelula estadoCelula;
                 
                 labelCelula = new JLabel();
                 labelCelula.setOpaque(true);
-                labelCelula.setBorder(BorderFactory.createLineBorder(Color.BLACK));
+                // labelCelula.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 matrizCelulas.add(labelCelula);
+                
+                if (i == 0 || i == tamanho - 1 || j == 0 || j == tamanho - 1){
+                    estadoCelula = EstadoCelula.PAREDE;
+                    
+                } else {
+                    estadoCelula = EstadoCelula.VAZIO;
+                }
                 
                 celulas[i][j] = new Celula(
                     i, //Posição X
                     j, //Posição Y
+                    estadoCelula, //Estado atual da celula
                     labelCelula //Ponteiro do label na matriz
                 );
-                
-                if (i == 0 || i == tamanho - 1 || j == 0 || j == tamanho - 1){
-                    cor = new Vector3(0, 0, 0);
-                    
-                } else {
-                    cor = new Vector3(0, 175, 0);
-                }
-                
-                celulas[i][j].definirCor(cor);
             }
         }
         
@@ -68,21 +66,29 @@ public class MatrizSwing implements KeyListener{
     
     public void atualizarMatriz(){
         No<Vector2> noAtual = lista.inicio;
-        Vector3 cor;
         
         for (int i = 0; i < lista.tamanho; i++){
-            if (noAtual == lista.inicio){
-                cor = new Vector3(0, 255, 255);
-                
-            } else if (noAtual == lista.fim){
-                cor = new Vector3(0, 0, 255);
-                
-            } else {
-                cor = new Vector3(0, 150, 255);
-            }
+            celulas[noAtual.valor.x][noAtual.valor.y].estado = EstadoCelula.COBRA;
             
-            celulas[noAtual.valor.x][noAtual.valor.y].definirCor(cor);
             noAtual = noAtual.proximo;
+        }
+        
+        for (int i = 0; i < tamanho; i++){
+            for (int j = 0; j < tamanho; j++){
+                EstadoCelula estadoCelula = celulas[i][j].estado;
+                
+                if (estadoCelula == EstadoCelula.VAZIO){
+                    celulas[i][j].definirCor(new Vector3(0, 255, 100));
+                }
+                
+                if (estadoCelula == EstadoCelula.PAREDE){
+                    celulas[i][j].definirCor(new Vector3(0, 0, 0));
+                }
+                
+                if (estadoCelula == EstadoCelula.COBRA){
+                    celulas[i][j].definirCor(new Vector3(0, 100, 255));
+                }
+            }
         }
     }
     

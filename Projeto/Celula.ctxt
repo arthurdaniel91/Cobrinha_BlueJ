@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=Celula
 comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Espaco\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
-comment1.params=x\ y\ labelCelula
-comment1.target=Celula(int,\ int,\ javax.swing.JLabel)
-comment2.params=cor
-comment2.target=void\ definirCor(pkgVector.Vector3)
-numComments=3
+comment1.params=x\ y\ estado\ label
+comment1.target=Celula(int,\ int,\ EstadoCelula,\ javax.swing.JLabel)
+comment2.params=estado
+comment2.target=void\ definirEstado(EstadoCelula)
+comment3.params=cor
+comment3.target=void\ definirCor(pkgVector.Vector3)
+numComments=4

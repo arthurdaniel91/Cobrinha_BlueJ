@@ -23,6 +23,6 @@ public class Aplicativo{
         }
         
         matriz.atualizarMatriz();
-        // lista.imprimirLista();
+        lista.imprimirLista();
     }
 }

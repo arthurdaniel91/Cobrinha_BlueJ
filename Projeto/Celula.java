@@ -12,15 +12,20 @@ import pkgVector.*;
 public class Celula{
     public final int x, y;
     public EstadoCelula estado;
-    public JLabel labelCelula;
+    public JLabel label;
     
-    public Celula(int x, int y, JLabel labelCelula){
+    public Celula(int x, int y, EstadoCelula estado, JLabel label){
         this.x = x;
         this.y = y;
-        this.labelCelula = labelCelula;
+        this.estado = estado;
+        this.label = label;
+    }
+    
+    public void definirEstado(EstadoCelula estado){
+        this.estado = estado;
     }
     
     public void definirCor(Vector3 cor){
-        labelCelula.setBackground(new Color(cor.x, cor.y, cor.z));
+        label.setBackground(new Color(cor.x, cor.y, cor.z));
     }
 }
