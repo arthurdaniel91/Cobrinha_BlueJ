@@ -1,4 +1,5 @@
 package pkgListaDuplamenteLigada;
+import pkgVector.*;
 
 /**
  * Escreva uma descrição da classe ListaDuplamenteLigada aqui.
@@ -20,6 +21,39 @@ public class ListaDuplamenteLigada<Tipo>{
     
     public boolean checarListaVazia(){
         return (tamanho == 0 || inicio == null);
+    }
+    
+    public void imprimirLista(){
+        if (checarListaVazia()){
+            System.out.println("A lista esta vazia.");
+            
+            return;
+        }
+        
+        No noAtual = this.inicio;
+        
+        System.out.print("[ ");
+        
+        while (true){
+            if (noAtual.valor instanceof Vector2){
+                Vector2 valor = (Vector2)noAtual.valor;
+                System.out.print("(" + valor.x + ", " + valor.y + ") ");
+                
+            } else {
+                System.out.print(noAtual.valor + " ");
+            }
+            
+            if (noAtual.proximo == null){
+                break;
+                
+            } else {
+                System.out.print("-> ");
+                
+                noAtual = noAtual.proximo;
+            }
+        }
+        
+        System.out.print("]");
     }
     
     public void adicionarFim(Tipo valor){

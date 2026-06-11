@@ -1,0 +1,6 @@
+#BlueJ class context
+comment0.target=TocadorAudio
+comment0.text=\r\n\ Tocador\ de\ audio\ em\ formato\ wav.\r\n\ \r\n\ @author\ Arthur\ Anton\r\n\ @version\ 09/06/2026\r\n
+comment1.params=filePath
+comment1.target=void\ tocarSom(java.lang.String)
+numComments=2
