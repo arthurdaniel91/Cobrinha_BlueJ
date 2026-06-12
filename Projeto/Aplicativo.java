@@ -30,7 +30,7 @@ public class Aplicativo{
         
         // matriz = new MatrizSwing(lista, tamanho);
         
-        tamanho = 25;
+        tamanho = 10;
         matriz = new MatrizSwing(lista, tamanho);
         
         for (int i = 0; i < 5; i++){

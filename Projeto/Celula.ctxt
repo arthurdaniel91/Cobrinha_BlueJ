@@ -7,4 +7,6 @@ comment2.params=estado
 comment2.target=void\ definirEstado(EstadoCelula)
 comment3.params=cor
 comment3.target=void\ definirCor(pkgVector.Vector3)
-numComments=4
+comment4.params=
+comment4.target=void\ definirCorLabel()
+numComments=5

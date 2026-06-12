@@ -12,6 +12,7 @@ import pkgVector.*;
 public class Celula{
     public final int x, y;
     public EstadoCelula estado;
+    public Vector3 cor;
     public JLabel label;
     
     public Celula(int x, int y, EstadoCelula estado, JLabel label){
@@ -26,6 +27,10 @@ public class Celula{
     }
     
     public void definirCor(Vector3 cor){
-        label.setBackground(new Color(cor.x, cor.y, cor.z));
+        this.cor = cor;
+    }
+    
+    public void definirCorLabel(){
+        label.setBackground(new Color(this.cor.x, this.cor.y, this.cor.z));
     }
 }

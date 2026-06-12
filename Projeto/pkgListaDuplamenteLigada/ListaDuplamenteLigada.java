@@ -68,6 +68,8 @@ public class ListaDuplamenteLigada<Tipo>{
             novoNo.proximo = this.inicio;
             this.inicio = novoNo;
         }
+        
+        tamanho++;
     }
     
     public void adicionarFim(Tipo valor){
@@ -91,6 +93,8 @@ public class ListaDuplamenteLigada<Tipo>{
         
         this.inicio = this.inicio.proximo;
         this.inicio.anterior = null;
+        
+        tamanho--;
     }
     
     public No obterPorIndice(int indice){
