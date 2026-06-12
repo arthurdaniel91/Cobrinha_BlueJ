@@ -1,6 +1,7 @@
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
 import pkgMatrizInterface.*;
+import java.util.Scanner;
 
 /**
  * Escreva uma descrição da classe Aplicativo aqui.
@@ -11,18 +12,34 @@ import pkgMatrizInterface.*;
 
 public class Aplicativo{
     private static ListaDuplamenteLigada lista = new ListaDuplamenteLigada<>();
-    private static MatrizSwing matriz = new MatrizSwing(lista, 50);
+    private static MatrizSwing matriz;
+    
+    private static Scanner scanner = new Scanner(System.in);
     
     public static void main(String args[]){
-        matriz.setup();
+        // System.out.println("\nTamanho da matriz (Min 25):\n");
+        int tamanho;
         
-        for (int i = 0; i < 25; i++){
-            Vector2 posicao = new Vector2(10, i + 10);
+        // do {
+            // tamanho = scanner.nextInt();
+            
+            // if (tamanho < 25){
+                // System.out.println("Tamanho invalido, tente novamente.");
+            // }
+        // } while (tamanho < 25);
+        
+        // matriz = new MatrizSwing(lista, tamanho);
+        
+        tamanho = 25;
+        matriz = new MatrizSwing(lista, tamanho);
+        
+        for (int i = 0; i < 5; i++){
+            Vector2 posicao = new Vector2((int)tamanho / 2, i + 3);
             
             lista.adicionarFim(posicao);
         }
         
-        matriz.atualizarMatriz();
-        lista.imprimirLista();
+        matriz.setup();
+        // lista.imprimirLista();
     }
 }

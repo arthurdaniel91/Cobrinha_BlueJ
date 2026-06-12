@@ -56,19 +56,53 @@ public class ListaDuplamenteLigada<Tipo>{
         System.out.print("]");
     }
     
-    public void adicionarFim(Tipo valor){
-        No<Tipo> NovoNo = new No<>(valor);
+    public void adicionarInicio(Tipo valor){
+        No<Tipo> novoNo = new No<>(valor);
         
         if (checarListaVazia()){
-            this.inicio = NovoNo;
-            this.fim = NovoNo;
+            this.inicio = novoNo;
+            this.fim = novoNo;
             
         } else {
-            this.fim.proximo = NovoNo;
-            NovoNo.anterior = this.fim;
-            this.fim = NovoNo;
+            this.inicio.anterior = novoNo;
+            novoNo.proximo = this.inicio;
+            this.inicio = novoNo;
+        }
+    }
+    
+    public void adicionarFim(Tipo valor){
+        No<Tipo> novoNo = new No<>(valor);
+        
+        if (checarListaVazia()){
+            this.inicio = novoNo;
+            this.fim = novoNo;
+            
+        } else {
+            this.fim.proximo = novoNo;
+            novoNo.anterior = this.fim;
+            this.fim = novoNo;
         }
         
         tamanho++;
+    }
+    
+    public void removerInicio(){
+        if (checarListaVazia()) return;
+        
+        this.inicio = this.inicio.proximo;
+        this.inicio.anterior = null;
+    }
+    
+    public No obterPorIndice(int indice){
+        if (checarListaVazia()) return null;
+        if (indice > this.tamanho - 1) return null;
+        
+        No<Tipo> noAtual = this.inicio;
+        
+        for (int i = 0; i < indice; i++){
+            noAtual = noAtual.proximo;
+        }
+        
+        return noAtual;
     }
 }
