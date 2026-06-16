@@ -22,6 +22,9 @@ public class Controle implements KeyListener{
     
     private JFrame janelaPrincipal;
     private JButton botaoConfigurar;
+    private JButton botaoConfirmar;
+    
+    private boolean menuConfigurarAberto = false;
     
     public Controle(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
@@ -56,11 +59,24 @@ public class Controle implements KeyListener{
     
     public void abrirMenuConfiguracoes(){
         display.montarJanelaConfigurar();
+        menuConfigurarAberto = true;
+        
+        botaoConfirmar = display.botaoConfirmar;
+        botaoConfirmar.addActionListener(e -> validarConfiguracoes());
+    }
+    
+    public void validarConfiguracoes(){
+        display.fecharMenuConfiguracoes();
+        
+        for (ActionListener AL : botaoConfirmar.getActionListeners()){
+            botaoConfirmar.removeActionListener(AL);
+        }
     }
     
     @Override
     public void keyPressed(KeyEvent tecla){
         if (tecla.getKeyCode() == KeyEvent.VK_ENTER && !dados.jogoRodando){
+            if (menuConfigurarAberto == true) return;
             dados.jogoRodando = true;
             
             display.atualizarInformacoes();

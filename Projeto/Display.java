@@ -2,6 +2,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JButton;
+import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
 import java.awt.GridBagLayout;
@@ -44,11 +45,18 @@ public class Display{
     
     private JPanel painelConfigurar;
     private JLabel tamanhoMatrizConfigurarLabel;
+    public JTextField tamanhoMatrizConfigurar;
     private JLabel corVazioConfigurarLabel;
+    public JTextField corVazioConfigurar;
     private JLabel corParedeConfigurarLabel;
+    public JTextField corParedeConfigurar;
     private JLabel corCaudaConfigurarLabel;
+    public JTextField corCaudaConfigurar;
     private JLabel corCabecaConfigurarLabel;
+    public JTextField corCabecaConfigurar;
     private JLabel corComidaConfigurarLabel;
+    public JTextField corComidaConfigurar;
+    public JButton botaoConfirmar;
     
     public Display(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
@@ -189,12 +197,90 @@ public class Display{
     
     public void montarJanelaConfigurar(){
         janelaConfigurar = new JFrame("Configurações");
-        janelaConfigurar.setSize(new Dimension(800, 800));
+        janelaConfigurar.setSize(new Dimension(700, 500));
         
+        SpringLayout layout = new SpringLayout();
         painelConfigurar = new JPanel();
-        painelConfigurar.setLayout(new SpringLayout());
+        painelConfigurar.setLayout(layout);
+        janelaConfigurar.add(painelConfigurar);
+        
+        tamanhoMatrizConfigurarLabel = new JLabel("Tamanho matriz: ");
+        tamanhoMatrizConfigurarLabel.setFont(tamanhoMatrizConfigurarLabel.getFont().deriveFont(24.0f));
+        tamanhoMatrizConfigurar = new JTextField("", 15);
+        tamanhoMatrizConfigurar.setFont(tamanhoMatrizConfigurar.getFont().deriveFont(24.0f));
+        layout.putConstraint(SpringLayout.WEST, tamanhoMatrizConfigurarLabel, 10, SpringLayout.WEST, painelConfigurar);
+        layout.putConstraint(SpringLayout.NORTH, tamanhoMatrizConfigurarLabel, 10, SpringLayout.NORTH, painelConfigurar);
+        layout.putConstraint(SpringLayout.WEST, tamanhoMatrizConfigurar, 10, SpringLayout.EAST, tamanhoMatrizConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, tamanhoMatrizConfigurar, 0, SpringLayout.NORTH, tamanhoMatrizConfigurarLabel);
+        painelConfigurar.add(tamanhoMatrizConfigurarLabel);
+        painelConfigurar.add(tamanhoMatrizConfigurar);
+        
+        corVazioConfigurarLabel = new JLabel("Cor das celulas vazias:");
+        corVazioConfigurarLabel.setFont(corVazioConfigurarLabel.getFont().deriveFont(24.0f));
+        corVazioConfigurar = new JTextField("", 15);
+        corVazioConfigurar.setFont(corVazioConfigurar.getFont().deriveFont(24.0f));
+        layout.putConstraint(SpringLayout.WEST, corVazioConfigurarLabel, 0, SpringLayout.WEST, tamanhoMatrizConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corVazioConfigurarLabel, 50, SpringLayout.NORTH, tamanhoMatrizConfigurarLabel);
+        layout.putConstraint(SpringLayout.WEST, corVazioConfigurar, 10, SpringLayout.EAST, corVazioConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corVazioConfigurar, 0, SpringLayout.NORTH, corVazioConfigurarLabel);
+        painelConfigurar.add(corVazioConfigurarLabel);
+        painelConfigurar.add(corVazioConfigurar);
+        
+        corParedeConfigurarLabel = new JLabel("Cor das paredes:");
+        corParedeConfigurarLabel.setFont(corParedeConfigurarLabel.getFont().deriveFont(24.0f));
+        corParedeConfigurar = new JTextField("", 15);
+        corParedeConfigurar.setFont(corParedeConfigurar.getFont().deriveFont(24.0f));
+        layout.putConstraint(SpringLayout.WEST, corParedeConfigurarLabel, 0, SpringLayout.WEST, corVazioConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corParedeConfigurarLabel, 50, SpringLayout.NORTH, corVazioConfigurarLabel);
+        layout.putConstraint(SpringLayout.WEST, corParedeConfigurar, 10, SpringLayout.EAST, corParedeConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corParedeConfigurar, 0, SpringLayout.NORTH, corParedeConfigurarLabel);
+        painelConfigurar.add(corParedeConfigurarLabel);
+        painelConfigurar.add(corParedeConfigurar);
+        
+        corCaudaConfigurarLabel = new JLabel("Cor da cobra (cauda):");
+        corCaudaConfigurarLabel.setFont(corCaudaConfigurarLabel.getFont().deriveFont(24.0f));
+        corCaudaConfigurar = new JTextField("", 15);
+        corCaudaConfigurar.setFont(corCaudaConfigurar.getFont().deriveFont(24.0f));
+        layout.putConstraint(SpringLayout.WEST, corCaudaConfigurarLabel, 0, SpringLayout.WEST, corParedeConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corCaudaConfigurarLabel, 50, SpringLayout.NORTH, corParedeConfigurarLabel);
+        layout.putConstraint(SpringLayout.WEST, corCaudaConfigurar, 10, SpringLayout.EAST, corCaudaConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corCaudaConfigurar, 0, SpringLayout.NORTH, corCaudaConfigurarLabel);
+        painelConfigurar.add(corCaudaConfigurarLabel);
+        painelConfigurar.add(corCaudaConfigurar);
+        
+        corCabecaConfigurarLabel = new JLabel("Cor da cobra (cabeça):");
+        corCabecaConfigurarLabel.setFont(corCabecaConfigurarLabel.getFont().deriveFont(24.0f));
+        corCabecaConfigurar = new JTextField("", 15);
+        corCabecaConfigurar.setFont(corCabecaConfigurar.getFont().deriveFont(24.0f));
+        layout.putConstraint(SpringLayout.WEST, corCabecaConfigurarLabel, 0, SpringLayout.WEST, corCaudaConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corCabecaConfigurarLabel, 50, SpringLayout.NORTH, corCaudaConfigurarLabel);
+        layout.putConstraint(SpringLayout.WEST, corCabecaConfigurar, 10, SpringLayout.EAST, corCabecaConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corCabecaConfigurar, 0, SpringLayout.NORTH, corCabecaConfigurarLabel);
+        painelConfigurar.add(corCabecaConfigurarLabel);
+        painelConfigurar.add(corCabecaConfigurar);
+        
+        corComidaConfigurarLabel = new JLabel("Cor da comida:");
+        corComidaConfigurarLabel.setFont(corComidaConfigurarLabel.getFont().deriveFont(24.0f));
+        corComidaConfigurar = new JTextField("", 15);
+        corComidaConfigurar.setFont(corComidaConfigurar.getFont().deriveFont(24.0f));
+        layout.putConstraint(SpringLayout.WEST, corComidaConfigurarLabel, 0, SpringLayout.WEST, corCabecaConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corComidaConfigurarLabel, 50, SpringLayout.NORTH, corCabecaConfigurarLabel);
+        layout.putConstraint(SpringLayout.WEST, corComidaConfigurar, 10, SpringLayout.EAST, corComidaConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, corComidaConfigurar, 0, SpringLayout.NORTH, corComidaConfigurarLabel);
+        painelConfigurar.add(corComidaConfigurarLabel);
+        painelConfigurar.add(corComidaConfigurar);
+        
+        botaoConfirmar = new JButton("Confirmar");
+        botaoConfirmar.setFont(botaoConfirmar.getFont().deriveFont(36.0f));
+        layout.putConstraint(SpringLayout.WEST, botaoConfirmar, 0, SpringLayout.WEST, corComidaConfigurarLabel);
+        layout.putConstraint(SpringLayout.NORTH, botaoConfirmar, 100, SpringLayout.NORTH, corComidaConfigurarLabel);
+        painelConfigurar.add(botaoConfirmar);
         
         janelaConfigurar.setVisible(true);
+    }
+    
+    public void fecharMenuConfiguracoes(){
+        janelaConfigurar.dispose();
     }
     
     public void atualizarInformacoes(){
