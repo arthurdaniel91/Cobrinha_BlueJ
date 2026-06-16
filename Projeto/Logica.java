@@ -10,6 +10,7 @@ import pkgJogo.*;
  * @author (seu nome) 
  * @version (um número da versão ou uma data)
  */
+
 public class Logica{
     private ListaDuplamenteLigada lista;
     private InformacoesJogo dados;
@@ -52,6 +53,7 @@ public class Logica{
     
     public void movimentarCobra(Vector2 direcao){
         No<Vector2> cabeca = lista.fim;
+        No<Vector2> pescoco = lista.fim.anterior;
         No<Vector2> cauda = lista.inicio;
         Vector2 novaPosicao = new Vector2(cabeca.valor.x - direcao.y, cabeca.valor.y + direcao.x);
         
@@ -59,10 +61,14 @@ public class Logica{
         boolean moveuParaCauda = false;
         
         if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.PAREDE || dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COBRA){
-            if (cauda.valor.x == novaPosicao.x && cauda.valor.y == novaPosicao.y){
+            if (novaPosicao.x == cauda.valor.x && novaPosicao.y == cauda.valor.y){
                 moveuParaCauda = true;
                 
             } else {
+                if (novaPosicao.x == pescoco.valor.x && novaPosicao.y == pescoco.valor.y){
+                    System.out.println("Pescoço");
+                }
+                
                 return;
             }
             
@@ -74,6 +80,8 @@ public class Logica{
         dados.celulas[novaPosicao.x][novaPosicao.y].estado = EstadoCelula.COBRA;
         
         if (obteveComida){
+            dados.pontuacao++;
+            
             sortearComida();
             
         } else {

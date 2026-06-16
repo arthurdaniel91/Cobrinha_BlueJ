@@ -1,7 +1,16 @@
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import javax.swing.*;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import javax.swing.BoxLayout;
+import javax.swing.SpringLayout;
+import java.awt.GridBagLayout;
+import java.awt.GridBagConstraints;
+import java.awt.GridLayout;
+import java.awt.Dimension;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Color;
 import java.util.Random;
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
@@ -13,6 +22,7 @@ import pkgJogo.*;
  * @author (seu nome) 
  * @version (um número da versão ou uma data)
  */
+
 public class Display{
     private ListaDuplamenteLigada<Vector2> lista;
     private InformacoesJogo dados;
@@ -23,10 +33,22 @@ public class Display{
     private JPanel matrizCelulas;
     
     private JPanel painelInformacoes;
+    private JLabel jogoRodandoLabel;
     private JLabel pontuacaoLabel;
-    private JLabel tamanhoMatrizLabel;
     private JLabel tamanhoCobraLabel;
+    private JLabel tamanhoMatrizLabel;
     private JLabel celulasVaziasLabel;
+    public JButton botaoConfigurar;
+    
+    private JFrame janelaConfigurar;
+    
+    private JPanel painelConfigurar;
+    private JLabel tamanhoMatrizConfigurarLabel;
+    private JLabel corVazioConfigurarLabel;
+    private JLabel corParedeConfigurarLabel;
+    private JLabel corCaudaConfigurarLabel;
+    private JLabel corCabecaConfigurarLabel;
+    private JLabel corComidaConfigurarLabel;
     
     public Display(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
@@ -66,25 +88,36 @@ public class Display{
         painelInformacoes.setMaximumSize(new Dimension(400, 800));
         janelaPrincipal.add(painelInformacoes, BorderLayout.EAST);
         
+        jogoRodandoLabel = new JLabel();
+        jogoRodandoLabel.setFont(jogoRodandoLabel.getFont().deriveFont(36.0f));
+        jogoRodandoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        painelInformacoes.add(jogoRodandoLabel);
+        
         pontuacaoLabel = new JLabel();
         pontuacaoLabel.setFont(pontuacaoLabel.getFont().deriveFont(24.0f));
-        pontuacaoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        pontuacaoLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         painelInformacoes.add(pontuacaoLabel);
         
         tamanhoMatrizLabel = new JLabel();
         tamanhoMatrizLabel.setFont(tamanhoMatrizLabel.getFont().deriveFont(24.0f));
-        tamanhoMatrizLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        tamanhoMatrizLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         painelInformacoes.add(tamanhoMatrizLabel);
         
         tamanhoCobraLabel = new JLabel();
         tamanhoCobraLabel.setFont(tamanhoCobraLabel.getFont().deriveFont(24.0f));
-        tamanhoCobraLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        tamanhoCobraLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         painelInformacoes.add(tamanhoCobraLabel);
         
         celulasVaziasLabel = new JLabel();
         celulasVaziasLabel.setFont(celulasVaziasLabel.getFont().deriveFont(24.0f));
-        celulasVaziasLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        celulasVaziasLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         painelInformacoes.add(celulasVaziasLabel);
+        
+        botaoConfigurar = new JButton("Configurar");
+        botaoConfigurar.setFont(botaoConfigurar.getFont().deriveFont(24.0f));
+        botaoConfigurar.setAlignmentX(Component.CENTER_ALIGNMENT);
+        botaoConfigurar.setFocusable(false);
+        painelInformacoes.add(botaoConfigurar);
         
         JLabel labelCelula;
         
@@ -154,7 +187,26 @@ public class Display{
         atualizarInformacoes();
     }
     
-    private void atualizarInformacoes(){
+    public void montarJanelaConfigurar(){
+        janelaConfigurar = new JFrame("Configurações");
+        janelaConfigurar.setSize(new Dimension(800, 800));
+        
+        painelConfigurar = new JPanel();
+        painelConfigurar.setLayout(new SpringLayout());
+        
+        janelaConfigurar.setVisible(true);
+    }
+    
+    public void atualizarInformacoes(){
+        if (dados.jogoRodando == true){
+            jogoRodandoLabel.setText("O jogo esta rodando!");
+            jogoRodandoLabel.setForeground(Color.GREEN);
+            
+        } else {
+            jogoRodandoLabel.setText("<html><center>O jogo não está rodando, pressione enter para começar.</center></html>");
+            jogoRodandoLabel.setForeground(Color.RED);
+        }
+        
         pontuacaoLabel.setText("Pontuacao: " + dados.pontuacao);
         tamanhoMatrizLabel.setText("Tamanho matriz: " + dados.tamanhoMatriz + " x " + dados.tamanhoMatriz);
         tamanhoCobraLabel.setText("Tamanho cobra: " + lista.tamanho);

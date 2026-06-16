@@ -1,6 +1,8 @@
 import javax.swing.JFrame;
+import javax.swing.JButton;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.ActionListener;
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
 import pkgJogo.*;
@@ -18,12 +20,16 @@ public class Controle implements KeyListener{
     private Logica logica;
     private Display display;
     
+    private JFrame janelaPrincipal;
+    private JButton botaoConfigurar;
+    
     public Controle(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
         this.dados = dados;
     }
     
     public void setup(){
+        dados.jogoRodando = false;
         dados.celulas = new Celula[dados.tamanhoMatriz][dados.tamanhoMatriz];
         
         if (lista.checarListaVazia()){
@@ -41,12 +47,27 @@ public class Controle implements KeyListener{
         display.setup();
         display.desenharMatriz();
         
-        JFrame janelaPrincipal = display.janelaPrincipal;
+        botaoConfigurar = display.botaoConfigurar;
+        botaoConfigurar.addActionListener(e -> abrirMenuConfiguracoes());
+        
+        janelaPrincipal = display.janelaPrincipal;
         janelaPrincipal.addKeyListener(this);
+    }
+    
+    public void abrirMenuConfiguracoes(){
+        display.montarJanelaConfigurar();
     }
     
     @Override
     public void keyPressed(KeyEvent tecla){
+        if (tecla.getKeyCode() == KeyEvent.VK_ENTER && !dados.jogoRodando){
+            dados.jogoRodando = true;
+            
+            display.atualizarInformacoes();
+        }
+        
+        if (!dados.jogoRodando) return;
+        
         if (tecla.getKeyCode() == KeyEvent.VK_UP){
             logica.movimentarCobra(new Vector2(0, 1));
             display.desenharMatriz();
