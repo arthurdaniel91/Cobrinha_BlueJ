@@ -7,19 +7,23 @@ import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
 
 /**
- * Escreva uma descrição da classe MatrizSwing aqui.
+ * Escreva uma descrição da classe Display aqui.
  * 
  * @author (seu nome) 
  * @version (um número da versão ou uma data)
  */
-public class MatrizSwing implements KeyListener{
+public class Display implements KeyListener{
     private ListaDuplamenteLigada<Vector2> lista;
     private Celula[][] celulas;
     private int tamanho;
     private int celulasVazias;
     
     private JFrame janelaPrincipal;
+    
+    private JPanel painelMatriz;
     private JPanel matrizCelulas;
+    
+    private JPanel painelInformacoes;
     
     private JFrame janelaInformacoes;
     private JPanel informacoesJogo;
@@ -27,7 +31,7 @@ public class MatrizSwing implements KeyListener{
     private JLabel tamanhoCobraLabel;
     private JLabel celulasVaziasLabel;
     
-    public MatrizSwing(ListaDuplamenteLigada lista, int tamanho){
+    public Display(ListaDuplamenteLigada lista, int tamanho){
         this.lista = lista;
         this.tamanho = tamanho;
         this.celulas = new Celula[tamanho][tamanho];
@@ -35,12 +39,65 @@ public class MatrizSwing implements KeyListener{
     
     public void setup(){
         janelaPrincipal = new JFrame("Snake");
-        janelaPrincipal.setSize(800, 800);
+        janelaPrincipal.setSize(1200, 800);
         janelaPrincipal.setLocationRelativeTo(null);
+        janelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        painelMatriz = new JPanel();
+        painelMatriz.setLayout(new GridBagLayout());
+        janelaPrincipal.add(painelMatriz);
+        
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.anchor = GridBagConstraints.WEST;
+        constraints.weightx = 1.0;
+        constraints.weighty = 1.0;
         
         matrizCelulas = new JPanel();
         matrizCelulas.setLayout(new GridLayout(tamanho, tamanho));
-        janelaPrincipal.add(matrizCelulas);
+        matrizCelulas.setPreferredSize(new Dimension(800, 800));
+        matrizCelulas.setMinimumSize(new Dimension(800, 800));
+        matrizCelulas.setMaximumSize(new Dimension(800, 800));
+        painelMatriz.add(matrizCelulas, constraints);
+        
+        painelInformacoes = new JPanel();
+        painelInformacoes.setLayout(new BoxLayout(painelInformacoes, BoxLayout.Y_AXIS));
+        painelInformacoes.setPreferredSize(new Dimension(400, 800));
+        painelInformacoes.setMinimumSize(new Dimension(400, 800));
+        painelInformacoes.setMaximumSize(new Dimension(400, 800));
+        // painelInformacoes.setBackground(Color.LIGHT_GRAY);
+        janelaPrincipal.add(painelInformacoes, BorderLayout.EAST);
+        
+        tamanhoMatrizLabel = new JLabel();
+        tamanhoMatrizLabel.setFont(tamanhoMatrizLabel.getFont().deriveFont(24.0f));
+        tamanhoMatrizLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelInformacoes.add(tamanhoMatrizLabel);
+        
+        tamanhoCobraLabel = new JLabel();
+        tamanhoCobraLabel.setFont(tamanhoCobraLabel.getFont().deriveFont(24.0f));
+        tamanhoCobraLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelInformacoes.add(tamanhoCobraLabel);
+        
+        celulasVaziasLabel = new JLabel();
+        celulasVaziasLabel.setFont(celulasVaziasLabel.getFont().deriveFont(24.0f));
+        celulasVaziasLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelInformacoes.add(celulasVaziasLabel);
+        
+        // janelaInformacoes = new JFrame("Informações");
+        // janelaInformacoes.setSize(400, 400);
+        // janelaInformacoes.setLocationRelativeTo(null);
+        
+        // informacoesJogo = new JPanel();
+        // informacoesJogo.setLayout(new BoxLayout(informacoesJogo, BoxLayout.Y_AXIS));
+        // janelaInformacoes.add(informacoesJogo);
+        
+        // tamanhoMatrizLabel = new JLabel();
+        // informacoesJogo.add(tamanhoMatrizLabel);
+        
+        // tamanhoCobraLabel = new JLabel();
+        // informacoesJogo.add(tamanhoCobraLabel);
+        
+        // celulasVaziasLabel = new JLabel();
+        // informacoesJogo.add(celulasVaziasLabel);
         
         JLabel labelCelula;
         
@@ -77,26 +134,9 @@ public class MatrizSwing implements KeyListener{
             noAtual = noAtual.proximo;
         }
         
-        janelaInformacoes = new JFrame("Informações");
-        janelaInformacoes.setSize(400, 400);
-        janelaInformacoes.setLocationRelativeTo(null);
-        
-        informacoesJogo = new JPanel();
-        informacoesJogo.setLayout(new BoxLayout(informacoesJogo, BoxLayout.Y_AXIS));
-        janelaInformacoes.add(informacoesJogo);
-        
-        tamanhoMatrizLabel = new JLabel();
-        informacoesJogo.add(tamanhoMatrizLabel);
-        
-        tamanhoCobraLabel = new JLabel();
-        informacoesJogo.add(tamanhoCobraLabel);
-        
-        celulasVaziasLabel = new JLabel();
-        informacoesJogo.add(celulasVaziasLabel);
-        
         janelaPrincipal.addKeyListener(this);
         janelaPrincipal.setVisible(true);
-        janelaInformacoes.setVisible(true);
+        // janelaInformacoes.setVisible(true);
         
         sortearComida();
         desenharMatriz();
