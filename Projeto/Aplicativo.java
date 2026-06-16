@@ -1,7 +1,6 @@
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
-import pkgMatrizInterface.*;
-import java.util.Scanner;
+import pkgJogo.*;
 
 /**
  * Escreva uma descrição da classe Aplicativo aqui.
@@ -15,13 +14,18 @@ public class Aplicativo{
     private static InformacoesJogo dados = new InformacoesJogo();
     private static Controle controle;
     
-    // private static Scanner scanner = new Scanner(System.in);
-    
     public static void main(String args[]){
-        int tamanhoMatrizInicial = 10;
-        int tamanhoCobraInicial = 5;
+        dados.tamanhoMatriz = 10; //Padrão: 10
+        dados.tamanhoCobra = 5; //Padrão: 5
+        dados.pontuacao = 0; //Padrão: 0
+        
+        dados.corVazio = new Vector3(150, 150, 150); //Padrão: 150, 150, 150
+        dados.corParede = new Vector3(0, 0, 0); //Padrão: 0, 0, 0
+        dados.corCauda = new Vector3(0, 100, 255); //Padrão: 0, 100, 255
+        dados.corCabeca = new Vector3(100, 255, 0); //Padrão: 100, 255, 0
+        dados.corComida = new Vector3(255, 0, 0); //Padrão: 255, 0, 0
         
         controle = new Controle(lista, dados);
-        controle.setup(tamanhoMatrizInicial, tamanhoCobraInicial);
+        controle.setup();
     }
 }

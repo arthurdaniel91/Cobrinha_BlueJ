@@ -8,6 +8,7 @@ import javax.sound.sampled.*;
  * @author Arthur Anton
  * @version 09/06/2026
  */
+
 public class TocadorAudio{
     public static void tocarSom(String filePath) {
         try {

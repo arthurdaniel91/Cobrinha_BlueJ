@@ -2,9 +2,9 @@
 comment0.target=Controle
 comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Controle\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
 comment1.params=lista\ dados
-comment1.target=Controle(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ InformacoesJogo)
-comment2.params=tamanhoMatriz\ tamanhoCobra
-comment2.target=void\ setup(int,\ int)
+comment1.target=Controle(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ pkgJogo.InformacoesJogo)
+comment2.params=
+comment2.target=void\ setup()
 comment3.params=tecla
 comment3.target=void\ keyPressed(java.awt.event.KeyEvent)
 comment4.params=tecla

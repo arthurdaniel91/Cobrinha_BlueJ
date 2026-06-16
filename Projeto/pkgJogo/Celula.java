@@ -1,3 +1,4 @@
+package pkgJogo;
 import java.awt.Color;
 import javax.swing.JLabel;
 import pkgVector.*;

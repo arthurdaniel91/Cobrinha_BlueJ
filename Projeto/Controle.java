@@ -3,6 +3,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
+import pkgJogo.*;
 
 /**
  * Escreva uma descrição da classe Controle aqui.
@@ -22,17 +23,16 @@ public class Controle implements KeyListener{
         this.dados = dados;
     }
     
-    public void setup(int tamanhoMatriz, int tamanhoCobra){
+    public void setup(){
+        dados.celulas = new Celula[dados.tamanhoMatriz][dados.tamanhoMatriz];
+        
         if (lista.checarListaVazia()){
-            for (int i = 0; i < tamanhoCobra; i++){
-                Vector2 posicao = new Vector2((int)tamanhoMatriz / 2, i + 3);
+            for (int i = 0; i < dados.tamanhoCobra; i++){
+                Vector2 posicao = new Vector2((int)dados.tamanhoMatriz / 2, i + 3);
                 
                 lista.adicionarFim(posicao);
             }
         }
-        
-        dados.tamanhoMatriz = tamanhoMatriz;
-        dados.celulas = new Celula[tamanhoMatriz][tamanhoMatriz];
         
         logica = new Logica(lista, dados);
         logica.setup();

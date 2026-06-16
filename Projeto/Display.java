@@ -5,6 +5,7 @@ import javax.swing.*;
 import java.util.Random;
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
+import pkgJogo.*;
 
 /**
  * Escreva uma descrição da classe Display aqui.
@@ -22,6 +23,7 @@ public class Display{
     private JPanel matrizCelulas;
     
     private JPanel painelInformacoes;
+    private JLabel pontuacaoLabel;
     private JLabel tamanhoMatrizLabel;
     private JLabel tamanhoCobraLabel;
     private JLabel celulasVaziasLabel;
@@ -32,6 +34,10 @@ public class Display{
     }
     
     public void setup(){
+        if (painelMatriz != null){
+            painelMatriz.removeAll();
+        }
+        
         janelaPrincipal = new JFrame("Snake");
         janelaPrincipal.setSize(1200, 800);
         janelaPrincipal.setLocationRelativeTo(null);
@@ -60,6 +66,11 @@ public class Display{
         painelInformacoes.setMaximumSize(new Dimension(400, 800));
         janelaPrincipal.add(painelInformacoes, BorderLayout.EAST);
         
+        pontuacaoLabel = new JLabel();
+        pontuacaoLabel.setFont(pontuacaoLabel.getFont().deriveFont(24.0f));
+        pontuacaoLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
+        painelInformacoes.add(pontuacaoLabel);
+        
         tamanhoMatrizLabel = new JLabel();
         tamanhoMatrizLabel.setFont(tamanhoMatrizLabel.getFont().deriveFont(24.0f));
         tamanhoMatrizLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
@@ -87,6 +98,9 @@ public class Display{
             }
         }
         
+        painelMatriz.revalidate();
+        painelMatriz.repaint();
+        
         janelaPrincipal.setVisible(true);
     }
     
@@ -103,9 +117,9 @@ public class Display{
                 t = (double)i / (lista.tamanho - 1);
             }
             
-            int R = interpolacaoLinear(0, 100, t);
-            int G = interpolacaoLinear(100, 255, t);
-            int B = interpolacaoLinear(255, 0, t);
+            int R = interpolacaoLinear(dados.corCauda.x, dados.corCabeca.x, t);
+            int G = interpolacaoLinear(dados.corCauda.y, dados.corCabeca.y, t);
+            int B = interpolacaoLinear(dados.corCauda.z, dados.corCabeca.z, t);
             
             dados.celulas[noAtual.valor.x][noAtual.valor.y].cor = new Vector3(R, G, B);
             noAtual = noAtual.proximo;
@@ -118,17 +132,17 @@ public class Display{
                 
                 switch(estadoCelula){
                     case VAZIO:
-                        dados.celulas[x][y].cor = new Vector3(150, 150, 150);
+                        dados.celulas[x][y].cor = dados.corVazio;
                         
                         break;
                     case PAREDE:
-                        dados.celulas[x][y].cor = new Vector3(0, 0, 0);
+                        dados.celulas[x][y].cor = dados.corParede;
                         
                         break;
                     case COBRA:
                         break;
                     case COMIDA:
-                        dados.celulas[x][y].cor = new Vector3(255, 0, 0);
+                        dados.celulas[x][y].cor = dados.corComida;
                         
                         break;
                 }
@@ -140,7 +154,8 @@ public class Display{
         atualizarInformacoes();
     }
     
-    public void atualizarInformacoes(){
+    private void atualizarInformacoes(){
+        pontuacaoLabel.setText("Pontuacao: " + dados.pontuacao);
         tamanhoMatrizLabel.setText("Tamanho matriz: " + dados.tamanhoMatriz + " x " + dados.tamanhoMatriz);
         tamanhoCobraLabel.setText("Tamanho cobra: " + lista.tamanho);
         celulasVaziasLabel.setText("Celulas vazias: " + dados.celulasVazias);
@@ -149,37 +164,4 @@ public class Display{
     private int interpolacaoLinear(int a, int b, double t){
         return (int)(a + (b - a) * t);
     }
-    
-    // @Override
-    // public void keyPressed(KeyEvent tecla){
-        // if (tecla.getKeyCode() == KeyEvent.VK_UP){
-            // movimentarCobra(new Vector2(0, 1));
-        // }
-        
-        // if (tecla.getKeyCode() == KeyEvent.VK_DOWN){
-            // movimentarCobra(new Vector2(0, -1));
-        // }
-        
-        // if (tecla.getKeyCode() == KeyEvent.VK_RIGHT){
-            // movimentarCobra(new Vector2(1, 0));
-        // }
-        
-        // if (tecla.getKeyCode() == KeyEvent.VK_LEFT){
-            // movimentarCobra(new Vector2(-1, 0));
-        // }
-        
-        // if (tecla.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-            // System.exit(0);
-        // }
-    // }
-    
-    // @Override
-    // public void keyReleased(KeyEvent tecla){
-        
-    // }
-    
-    // @Override
-    // public void keyTyped(KeyEvent tecla){
-        
-    // }
 }

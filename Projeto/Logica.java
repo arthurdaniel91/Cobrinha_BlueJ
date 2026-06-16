@@ -2,6 +2,7 @@ import javax.swing.JLabel;
 import java.util.Random;
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
+import pkgJogo.*;
 
 /**
  * Escreva uma descrição da classe Logica aqui.

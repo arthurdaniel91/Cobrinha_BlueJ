@@ -2,7 +2,7 @@
 comment0.target=Display
 comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Display\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
 comment1.params=lista\ dados
-comment1.target=Display(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ InformacoesJogo)
+comment1.target=Display(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ pkgJogo.InformacoesJogo)
 comment2.params=
 comment2.target=void\ setup()
 comment3.params=

@@ -1,6 +1,4 @@
-package pkgMatrizInterface;
-
-
+package pkgJogo;
 
 /**
  * Enumeração Banana - escreva a descrição da enumeração aqui
