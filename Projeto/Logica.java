@@ -51,7 +51,7 @@ public class Logica{
         sortearComida();
     }
     
-    public void movimentarCobra(Vector2 direcao){
+    public boolean movimentarCobra(Vector2 direcao){
         No<Vector2> cabeca = lista.fim;
         No<Vector2> pescoco = lista.fim.anterior;
         No<Vector2> cauda = lista.inicio;
@@ -66,10 +66,11 @@ public class Logica{
                 
             } else {
                 if (novaPosicao.x == pescoco.valor.x && novaPosicao.y == pescoco.valor.y){
-                    // System.out.println("Pescoço");
+                    return false;
+                    
                 }
                 
-                return;
+                return true;
             }
             
         } else if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COMIDA){
@@ -91,6 +92,8 @@ public class Logica{
             
             lista.removerInicio();
         }
+        
+        return false;
     }
     
     public void sortearComida(){

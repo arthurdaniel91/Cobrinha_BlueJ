@@ -36,7 +36,8 @@ public class Controle implements KeyListener{
     }
     
     public void setup(){
-        dados.jogoRodando = false;
+        // dados.jogoRodando = false;
+        dados.jogadorVivo = true;
         dados.celulas = new Celula[dados.tamanhoMatriz][dados.tamanhoMatriz];
         
         if (!lista.checarListaVazia()){
@@ -190,24 +191,51 @@ public class Controle implements KeyListener{
         }
         
         // if (!dados.jogoRodando) return;
+        if (!dados.jogadorVivo) return;
+        
+        Vector2 direcao = new Vector2(0, 0);
         
         if (tecla.getKeyCode() == KeyEvent.VK_UP){
-            logica.movimentarCobra(new Vector2(0, 1));
-            display.desenharMatriz();
+            direcao.x = 0;
+            direcao.y = 1;
+            
+            // jogadorMorreu = logica.movimentarCobra(new Vector2(0, 1));
+            // display.desenharMatriz();
         }
         
         if (tecla.getKeyCode() == KeyEvent.VK_DOWN){
-            logica.movimentarCobra(new Vector2(0, -1));
-            display.desenharMatriz();
+            direcao.x = 0;
+            direcao.y = -1;
+            
+            // logica.movimentarCobra(new Vector2(0, -1));
+            // display.desenharMatriz();
         }
         
         if (tecla.getKeyCode() == KeyEvent.VK_RIGHT){
-            logica.movimentarCobra(new Vector2(1, 0));
-            display.desenharMatriz();
+            direcao.x = 1;
+            direcao.y = 0;
+            
+            // logica.movimentarCobra(new Vector2(1, 0));
+            // display.desenharMatriz();
         }
         
         if (tecla.getKeyCode() == KeyEvent.VK_LEFT){
-            logica.movimentarCobra(new Vector2(-1, 0));
+            direcao.x = -1;
+            direcao.y = 0;
+            
+            // logica.movimentarCobra(new Vector2(-1, 0));
+            // display.desenharMatriz();
+        }
+        
+        if (direcao.x == 0 && direcao.y == 0) return;
+        
+        boolean jogadorMorreu = logica.movimentarCobra(direcao);
+        
+        if (jogadorMorreu == true){
+            display.mostrarMensagem("Jogador colidiu com a parede ou com o próprio corpo, encerrando jogo.");
+            dados.jogadorVivo = false;
+            
+        } else {
             display.desenharMatriz();
         }
     }

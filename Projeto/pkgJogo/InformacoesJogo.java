@@ -10,6 +10,7 @@ import pkgVector.Vector3;
 
 public class InformacoesJogo{
     public boolean jogoRodando;
+    public boolean jogadorVivo;
     
     public int tamanhoMatriz;
     public int tamanhoCobra;
