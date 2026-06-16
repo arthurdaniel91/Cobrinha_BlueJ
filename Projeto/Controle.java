@@ -1,3 +1,6 @@
+import javax.swing.JFrame;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import pkgListaDuplamenteLigada.*;
 import pkgVector.*;
 
@@ -8,7 +11,7 @@ import pkgVector.*;
  * @version (um número da versão ou uma data)
  */
 
-public class Controle{
+public class Controle implements KeyListener{
     private ListaDuplamenteLigada lista;
     private InformacoesJogo dados;
     private Logica logica;
@@ -32,7 +35,46 @@ public class Controle{
         dados.celulas = new Celula[tamanhoMatriz][tamanhoMatriz];
         
         logica = new Logica(lista, dados);
-        display = new Display(lista, tamanhoMatriz, dados);
+        logica.setup();
+        
+        display = new Display(lista, dados);
         display.setup();
+        display.desenharMatriz();
+        
+        JFrame janelaPrincipal = display.janelaPrincipal;
+        janelaPrincipal.addKeyListener(this);
+    }
+    
+    @Override
+    public void keyPressed(KeyEvent tecla){
+        if (tecla.getKeyCode() == KeyEvent.VK_UP){
+            logica.movimentarCobra(new Vector2(0, 1));
+            display.desenharMatriz();
+        }
+        
+        if (tecla.getKeyCode() == KeyEvent.VK_DOWN){
+            logica.movimentarCobra(new Vector2(0, -1));
+            display.desenharMatriz();
+        }
+        
+        if (tecla.getKeyCode() == KeyEvent.VK_RIGHT){
+            logica.movimentarCobra(new Vector2(1, 0));
+            display.desenharMatriz();
+        }
+        
+        if (tecla.getKeyCode() == KeyEvent.VK_LEFT){
+            logica.movimentarCobra(new Vector2(-1, 0));
+            display.desenharMatriz();
+        }
+    }
+    
+    @Override
+    public void keyReleased(KeyEvent tecla){
+        
+    }
+    
+    @Override
+    public void keyTyped(KeyEvent tecla){
+        
     }
 }

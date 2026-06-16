@@ -15,22 +15,13 @@ public class Celula{
     public Vector3 cor;
     public JLabel label;
     
-    public Celula(int x, int y, EstadoCelula estado, JLabel label){
+    public Celula(int x, int y, EstadoCelula estado){
         this.x = x;
         this.y = y;
         this.estado = estado;
-        this.label = label;
     }
     
-    public void definirEstado(EstadoCelula estado){
-        this.estado = estado;
-    }
-    
-    public void definirCor(Vector3 cor){
-        this.cor = cor;
-    }
-    
-    public void definirCorLabel(){
+    public void aplicarCor(){
         label.setBackground(new Color(this.cor.x, this.cor.y, this.cor.z));
     }
 }

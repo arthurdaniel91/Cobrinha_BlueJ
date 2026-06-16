@@ -12,24 +12,21 @@ import pkgVector.*;
  * @author (seu nome) 
  * @version (um número da versão ou uma data)
  */
-public class Display implements KeyListener{
+public class Display{
     private ListaDuplamenteLigada<Vector2> lista;
     private InformacoesJogo dados;
-    private int celulasVazias;
     
-    private JFrame janelaPrincipal;
+    public JFrame janelaPrincipal;
     
     private JPanel painelMatriz;
     private JPanel matrizCelulas;
     
     private JPanel painelInformacoes;
-    // private JFrame janelaInformacoes;
-    // private JPanel informacoesJogo;
     private JLabel tamanhoMatrizLabel;
     private JLabel tamanhoCobraLabel;
     private JLabel celulasVaziasLabel;
     
-    public Display(ListaDuplamenteLigada lista, int tamanho, InformacoesJogo dados){
+    public Display(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
         this.dados = dados;
     }
@@ -61,7 +58,6 @@ public class Display implements KeyListener{
         painelInformacoes.setPreferredSize(new Dimension(400, 800));
         painelInformacoes.setMinimumSize(new Dimension(400, 800));
         painelInformacoes.setMaximumSize(new Dimension(400, 800));
-        // painelInformacoes.setBackground(Color.LIGHT_GRAY);
         janelaPrincipal.add(painelInformacoes, BorderLayout.EAST);
         
         tamanhoMatrizLabel = new JLabel();
@@ -83,43 +79,15 @@ public class Display implements KeyListener{
         
         for (int x = 0; x < dados.tamanhoMatriz; x++){
             for (int y = 0; y < dados.tamanhoMatriz; y++){
-                EstadoCelula estadoCelula;
-                
                 labelCelula = new JLabel();
                 labelCelula.setOpaque(true);
-                // labelCelula.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 matrizCelulas.add(labelCelula);
                 
-                if (x == 0 || x == dados.tamanhoMatriz - 1 || y == 0 || y == dados.tamanhoMatriz - 1){
-                    estadoCelula = EstadoCelula.PAREDE;
-                    
-                } else {
-                    estadoCelula = EstadoCelula.VAZIO;
-                }
-                
-                dados.celulas[x][y] = new Celula(
-                    x, //Posição X
-                    y, //Posição Y
-                    estadoCelula, //Estado atual da celula
-                    labelCelula //Ponteiro do label na celula na matriz
-                );
+                dados.celulas[x][y].label = labelCelula;
             }
         }
         
-        No<Vector2> noAtual = lista.inicio;
-        
-        for (int i = 0; i < lista.tamanho; i++){
-            dados.celulas[noAtual.valor.x][noAtual.valor.y].definirEstado(EstadoCelula.COBRA);
-            
-            noAtual = noAtual.proximo;
-        }
-        
-        janelaPrincipal.addKeyListener(this);
         janelaPrincipal.setVisible(true);
-        // janelaInformacoes.setVisible(true);
-        
-        sortearComida();
-        desenharMatriz();
     }
     
     public void desenharMatriz(){
@@ -135,17 +103,11 @@ public class Display implements KeyListener{
                 t = (double)i / (lista.tamanho - 1);
             }
             
-            
-            //(0, 100, 255) - (100, 255, 0)
             int R = interpolacaoLinear(0, 100, t);
             int G = interpolacaoLinear(100, 255, t);
             int B = interpolacaoLinear(255, 0, t);
-            // int R = (int)(255 + t * (0 - 255));
-            // int G = (int)(255 + t * (100 - 255));
             
-            // System.out.println("(" + R + ", " + G + ", " + B + ")");
-            
-            dados.celulas[noAtual.valor.x][noAtual.valor.y].definirCor(new Vector3(R, G, B));
+            dados.celulas[noAtual.valor.x][noAtual.valor.y].cor = new Vector3(R, G, B);
             noAtual = noAtual.proximo;
         }
         
@@ -154,27 +116,24 @@ public class Display implements KeyListener{
                 EstadoCelula estadoCelula = dados.celulas[x][y].estado;
                 JLabel bordaCelula = dados.celulas[x][y].label;
                 
-                // bordaCelula.setBorder(null);
-                
                 switch(estadoCelula){
                     case VAZIO:
-                        dados.celulas[x][y].definirCor(new Vector3(150, 150, 150));
+                        dados.celulas[x][y].cor = new Vector3(150, 150, 150);
                         
                         break;
                     case PAREDE:
-                        dados.celulas[x][y].definirCor(new Vector3(0, 0, 0));
+                        dados.celulas[x][y].cor = new Vector3(0, 0, 0);
                         
                         break;
                     case COBRA:
                         break;
                     case COMIDA:
-                        // bordaCelula.setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
-                        dados.celulas[x][y].definirCor(new Vector3(255, 0, 0));
+                        dados.celulas[x][y].cor = new Vector3(255, 0, 0);
                         
                         break;
                 }
                 
-                dados.celulas[x][y].definirCorLabel();
+                dados.celulas[x][y].aplicarCor();
             }
         }
         
@@ -184,95 +143,43 @@ public class Display implements KeyListener{
     public void atualizarInformacoes(){
         tamanhoMatrizLabel.setText("Tamanho matriz: " + dados.tamanhoMatriz + " x " + dados.tamanhoMatriz);
         tamanhoCobraLabel.setText("Tamanho cobra: " + lista.tamanho);
-        celulasVaziasLabel.setText("Celulas vazias: " + celulasVazias);
-    }
-    
-    public void sortearComida(){
-        Random random = new Random();
-        ListaDuplamenteLigada<Vector2> posicoesVazias = new ListaDuplamenteLigada<Vector2>();
-        
-        for (int x = 0; x < dados.tamanhoMatriz; x++){
-            for (int y = 0; y < dados.tamanhoMatriz; y++){
-                if (dados.celulas[x][y].estado == EstadoCelula.VAZIO) posicoesVazias.adicionarFim(new Vector2(x, y));
-            }
-        }
-        
-        celulasVazias = posicoesVazias.tamanho;
-        
-        if (celulasVazias <= 0){
-            System.out.println("Jogador venceu, encerrando jogo.");
-            
-            System.exit(0);
-        }
-        
-        int numeroAleatorio = random.nextInt(posicoesVazias.tamanho);
-        No<Vector2> noSorteado = posicoesVazias.obterPorIndice(numeroAleatorio);
-        
-        dados.celulas[noSorteado.valor.x][noSorteado.valor.y].definirEstado(EstadoCelula.COMIDA);
-    }
-    
-    public void movimentarCobra(Vector2 direcao){
-        No<Vector2> cabeca = lista.fim;
-        No<Vector2> cauda = lista.inicio;
-        Vector2 novaPosicao = new Vector2(cabeca.valor.x - direcao.y, cabeca.valor.y + direcao.x);
-        boolean obteveComida = false;
-        
-        if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.PAREDE || dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COBRA){
-            // System.out.println("Bateu na parede/no corpo");
-            
-            return;
-        } else if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COMIDA){
-            obteveComida = true;
-        }
-        
-        lista.adicionarFim(novaPosicao);
-        dados.celulas[novaPosicao.x][novaPosicao.y].definirEstado(EstadoCelula.COBRA);
-        
-        if (obteveComida){
-            sortearComida();
-            
-        } else {
-            dados.celulas[cauda.valor.x][cauda.valor.y].definirEstado(EstadoCelula.VAZIO);
-            lista.removerInicio();
-        }
-        
-        desenharMatriz();
+        celulasVaziasLabel.setText("Celulas vazias: " + dados.celulasVazias);
     }
     
     private int interpolacaoLinear(int a, int b, double t){
         return (int)(a + (b - a) * t);
     }
     
-    @Override
-    public void keyPressed(KeyEvent tecla){
-        if (tecla.getKeyCode() == KeyEvent.VK_UP){
-            movimentarCobra(new Vector2(0, 1));
-        }
+    // @Override
+    // public void keyPressed(KeyEvent tecla){
+        // if (tecla.getKeyCode() == KeyEvent.VK_UP){
+            // movimentarCobra(new Vector2(0, 1));
+        // }
         
-        if (tecla.getKeyCode() == KeyEvent.VK_DOWN){
-            movimentarCobra(new Vector2(0, -1));
-        }
+        // if (tecla.getKeyCode() == KeyEvent.VK_DOWN){
+            // movimentarCobra(new Vector2(0, -1));
+        // }
         
-        if (tecla.getKeyCode() == KeyEvent.VK_RIGHT){
-            movimentarCobra(new Vector2(1, 0));
-        }
+        // if (tecla.getKeyCode() == KeyEvent.VK_RIGHT){
+            // movimentarCobra(new Vector2(1, 0));
+        // }
         
-        if (tecla.getKeyCode() == KeyEvent.VK_LEFT){
-            movimentarCobra(new Vector2(-1, 0));
-        }
+        // if (tecla.getKeyCode() == KeyEvent.VK_LEFT){
+            // movimentarCobra(new Vector2(-1, 0));
+        // }
         
-        if (tecla.getKeyCode() == KeyEvent.VK_BACK_SPACE){
-            System.exit(0);
-        }
-    }
+        // if (tecla.getKeyCode() == KeyEvent.VK_BACK_SPACE){
+            // System.exit(0);
+        // }
+    // }
     
-    @Override
-    public void keyReleased(KeyEvent tecla){
+    // @Override
+    // public void keyReleased(KeyEvent tecla){
         
-    }
+    // }
     
-    @Override
-    public void keyTyped(KeyEvent tecla){
+    // @Override
+    // public void keyTyped(KeyEvent tecla){
         
-    }
+    // }
 }

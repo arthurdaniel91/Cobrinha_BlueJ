@@ -9,4 +9,5 @@ public class InformacoesJogo{
     public int tamanhoMatriz;
     public int pontuacao;
     public Celula[][] celulas;
+    public int celulasVazias;
 }
