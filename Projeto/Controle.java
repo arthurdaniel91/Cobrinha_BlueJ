@@ -10,15 +10,13 @@ import pkgVector.*;
 
 public class Controle{
     private ListaDuplamenteLigada lista;
+    private InformacoesJogo dados;
     private Logica logica;
     private Display display;
     
-    private int tamanhoMatriz;
-    private int tamanhoCobra;
-    private Celula[][] celulas;
-    
-    public Controle(ListaDuplamenteLigada lista){
+    public Controle(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
+        this.dados = dados;
     }
     
     public void setup(int tamanhoMatriz, int tamanhoCobra){
@@ -30,12 +28,11 @@ public class Controle{
             }
         }
         
-        this.tamanhoMatriz = tamanhoMatriz;
-        this.tamanhoCobra = tamanhoCobra;
-        this.celulas = new Celula[tamanhoMatriz][tamanhoMatriz];
+        dados.tamanhoMatriz = tamanhoMatriz;
+        dados.celulas = new Celula[tamanhoMatriz][tamanhoMatriz];
         
-        logica = new Logica(lista, celulas);
-        display = new Display(lista, tamanhoMatriz, celulas);
+        logica = new Logica(lista, dados);
+        display = new Display(lista, tamanhoMatriz, dados);
         display.setup();
     }
 }

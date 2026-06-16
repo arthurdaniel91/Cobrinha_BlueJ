@@ -8,11 +8,11 @@ import pkgListaDuplamenteLigada.*;
  */
 public class Logica{
     private ListaDuplamenteLigada lista;
-    private Celula[][] celulas;
+    private InformacoesJogo dados;
     
-    public Logica(ListaDuplamenteLigada lista, Celula[][] celulas){
+    public Logica(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
-        this.celulas = celulas;
+        this.dados = dados;
     }
     
     public void movimentarCobra(){

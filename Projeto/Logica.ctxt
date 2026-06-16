@@ -1,8 +1,8 @@
 #BlueJ class context
 comment0.target=Logica
 comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Logica\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
-comment1.params=lista\ celulas
-comment1.target=Logica(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ Celula[][])
+comment1.params=lista\ dados
+comment1.target=Logica(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ InformacoesJogo)
 comment2.params=
 comment2.target=void\ movimentarCobra()
 numComments=3

@@ -12,6 +12,7 @@ import java.util.Scanner;
 
 public class Aplicativo{
     private static ListaDuplamenteLigada lista = new ListaDuplamenteLigada<>();
+    private static InformacoesJogo dados = new InformacoesJogo();
     private static Controle controle;
     
     // private static Scanner scanner = new Scanner(System.in);
@@ -20,7 +21,7 @@ public class Aplicativo{
         int tamanhoMatrizInicial = 10;
         int tamanhoCobraInicial = 5;
         
-        controle = new Controle(lista);
+        controle = new Controle(lista, dados);
         controle.setup(tamanhoMatrizInicial, tamanhoCobraInicial);
     }
 }

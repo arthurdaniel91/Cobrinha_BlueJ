@@ -14,8 +14,7 @@ import pkgVector.*;
  */
 public class Display implements KeyListener{
     private ListaDuplamenteLigada<Vector2> lista;
-    private Celula[][] celulas;
-    private int tamanho;
+    private InformacoesJogo dados;
     private int celulasVazias;
     
     private JFrame janelaPrincipal;
@@ -30,10 +29,9 @@ public class Display implements KeyListener{
     private JLabel tamanhoCobraLabel;
     private JLabel celulasVaziasLabel;
     
-    public Display(ListaDuplamenteLigada lista, int tamanho, Celula[][] celulas){
+    public Display(ListaDuplamenteLigada lista, int tamanho, InformacoesJogo dados){
         this.lista = lista;
-        this.tamanho = tamanho;
-        this.celulas = celulas;
+        this.dados = dados;
     }
     
     public void setup(){
@@ -52,7 +50,7 @@ public class Display implements KeyListener{
         constraints.weighty = 1.0;
         
         matrizCelulas = new JPanel();
-        matrizCelulas.setLayout(new GridLayout(tamanho, tamanho));
+        matrizCelulas.setLayout(new GridLayout(dados.tamanhoMatriz, dados.tamanhoMatriz));
         matrizCelulas.setPreferredSize(new Dimension(800, 800));
         matrizCelulas.setMinimumSize(new Dimension(800, 800));
         matrizCelulas.setMaximumSize(new Dimension(800, 800));
@@ -81,27 +79,10 @@ public class Display implements KeyListener{
         celulasVaziasLabel.setAlignmentX(Component.LEFT_ALIGNMENT);
         painelInformacoes.add(celulasVaziasLabel);
         
-        // janelaInformacoes = new JFrame("Informações");
-        // janelaInformacoes.setSize(400, 400);
-        // janelaInformacoes.setLocationRelativeTo(null);
-        
-        // informacoesJogo = new JPanel();
-        // informacoesJogo.setLayout(new BoxLayout(informacoesJogo, BoxLayout.Y_AXIS));
-        // janelaInformacoes.add(informacoesJogo);
-        
-        // tamanhoMatrizLabel = new JLabel();
-        // informacoesJogo.add(tamanhoMatrizLabel);
-        
-        // tamanhoCobraLabel = new JLabel();
-        // informacoesJogo.add(tamanhoCobraLabel);
-        
-        // celulasVaziasLabel = new JLabel();
-        // informacoesJogo.add(celulasVaziasLabel);
-        
         JLabel labelCelula;
         
-        for (int x = 0; x < tamanho; x++){
-            for (int y = 0; y < tamanho; y++){
+        for (int x = 0; x < dados.tamanhoMatriz; x++){
+            for (int y = 0; y < dados.tamanhoMatriz; y++){
                 EstadoCelula estadoCelula;
                 
                 labelCelula = new JLabel();
@@ -109,14 +90,14 @@ public class Display implements KeyListener{
                 // labelCelula.setBorder(BorderFactory.createLineBorder(Color.BLACK));
                 matrizCelulas.add(labelCelula);
                 
-                if (x == 0 || x == tamanho - 1 || y == 0 || y == tamanho - 1){
+                if (x == 0 || x == dados.tamanhoMatriz - 1 || y == 0 || y == dados.tamanhoMatriz - 1){
                     estadoCelula = EstadoCelula.PAREDE;
                     
                 } else {
                     estadoCelula = EstadoCelula.VAZIO;
                 }
                 
-                celulas[x][y] = new Celula(
+                dados.celulas[x][y] = new Celula(
                     x, //Posição X
                     y, //Posição Y
                     estadoCelula, //Estado atual da celula
@@ -128,7 +109,7 @@ public class Display implements KeyListener{
         No<Vector2> noAtual = lista.inicio;
         
         for (int i = 0; i < lista.tamanho; i++){
-            celulas[noAtual.valor.x][noAtual.valor.y].definirEstado(EstadoCelula.COBRA);
+            dados.celulas[noAtual.valor.x][noAtual.valor.y].definirEstado(EstadoCelula.COBRA);
             
             noAtual = noAtual.proximo;
         }
@@ -164,36 +145,36 @@ public class Display implements KeyListener{
             
             // System.out.println("(" + R + ", " + G + ", " + B + ")");
             
-            celulas[noAtual.valor.x][noAtual.valor.y].definirCor(new Vector3(R, G, B));
+            dados.celulas[noAtual.valor.x][noAtual.valor.y].definirCor(new Vector3(R, G, B));
             noAtual = noAtual.proximo;
         }
         
-        for (int x = 0; x < tamanho; x++){
-            for (int y = 0; y < tamanho; y++){
-                EstadoCelula estadoCelula = celulas[x][y].estado;
-                JLabel bordaCelula = celulas[x][y].label;
+        for (int x = 0; x < dados.tamanhoMatriz; x++){
+            for (int y = 0; y < dados.tamanhoMatriz; y++){
+                EstadoCelula estadoCelula = dados.celulas[x][y].estado;
+                JLabel bordaCelula = dados.celulas[x][y].label;
                 
                 // bordaCelula.setBorder(null);
                 
                 switch(estadoCelula){
                     case VAZIO:
-                        celulas[x][y].definirCor(new Vector3(150, 150, 150));
+                        dados.celulas[x][y].definirCor(new Vector3(150, 150, 150));
                         
                         break;
                     case PAREDE:
-                        celulas[x][y].definirCor(new Vector3(0, 0, 0));
+                        dados.celulas[x][y].definirCor(new Vector3(0, 0, 0));
                         
                         break;
                     case COBRA:
                         break;
                     case COMIDA:
                         // bordaCelula.setBorder(BorderFactory.createLineBorder(Color.BLACK, 10));
-                        celulas[x][y].definirCor(new Vector3(255, 0, 0));
+                        dados.celulas[x][y].definirCor(new Vector3(255, 0, 0));
                         
                         break;
                 }
                 
-                celulas[x][y].definirCorLabel();
+                dados.celulas[x][y].definirCorLabel();
             }
         }
         
@@ -201,7 +182,7 @@ public class Display implements KeyListener{
     }
     
     public void atualizarInformacoes(){
-        tamanhoMatrizLabel.setText("Tamanho matriz: " + tamanho + " x " + tamanho);
+        tamanhoMatrizLabel.setText("Tamanho matriz: " + dados.tamanhoMatriz + " x " + dados.tamanhoMatriz);
         tamanhoCobraLabel.setText("Tamanho cobra: " + lista.tamanho);
         celulasVaziasLabel.setText("Celulas vazias: " + celulasVazias);
     }
@@ -210,9 +191,9 @@ public class Display implements KeyListener{
         Random random = new Random();
         ListaDuplamenteLigada<Vector2> posicoesVazias = new ListaDuplamenteLigada<Vector2>();
         
-        for (int x = 0; x < tamanho; x++){
-            for (int y = 0; y < tamanho; y++){
-                if (celulas[x][y].estado == EstadoCelula.VAZIO) posicoesVazias.adicionarFim(new Vector2(x, y));
+        for (int x = 0; x < dados.tamanhoMatriz; x++){
+            for (int y = 0; y < dados.tamanhoMatriz; y++){
+                if (dados.celulas[x][y].estado == EstadoCelula.VAZIO) posicoesVazias.adicionarFim(new Vector2(x, y));
             }
         }
         
@@ -227,47 +208,31 @@ public class Display implements KeyListener{
         int numeroAleatorio = random.nextInt(posicoesVazias.tamanho);
         No<Vector2> noSorteado = posicoesVazias.obterPorIndice(numeroAleatorio);
         
-        celulas[noSorteado.valor.x][noSorteado.valor.y].definirEstado(EstadoCelula.COMIDA);
+        dados.celulas[noSorteado.valor.x][noSorteado.valor.y].definirEstado(EstadoCelula.COMIDA);
     }
     
     public void movimentarCobra(Vector2 direcao){
-        // if (direcao.y == 1){
-            // System.out.println("Seta pra cima");
-        // }
-        
-        // if (direcao.y == -1){
-            // System.out.println("Seta pra baixo");
-        // }
-        
-        // if (direcao.x == 1){
-            // System.out.println("Seta pra direita");
-        // }
-        
-        // if (direcao.x == -1){
-            // System.out.println("Seta pra esquerda");
-        // }
-        
         No<Vector2> cabeca = lista.fim;
         No<Vector2> cauda = lista.inicio;
         Vector2 novaPosicao = new Vector2(cabeca.valor.x - direcao.y, cabeca.valor.y + direcao.x);
         boolean obteveComida = false;
         
-        if (celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.PAREDE || celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COBRA){
+        if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.PAREDE || dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COBRA){
             // System.out.println("Bateu na parede/no corpo");
             
             return;
-        } else if (celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COMIDA){
+        } else if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COMIDA){
             obteveComida = true;
         }
         
         lista.adicionarFim(novaPosicao);
-        celulas[novaPosicao.x][novaPosicao.y].definirEstado(EstadoCelula.COBRA);
+        dados.celulas[novaPosicao.x][novaPosicao.y].definirEstado(EstadoCelula.COBRA);
         
         if (obteveComida){
             sortearComida();
             
         } else {
-            celulas[cauda.valor.x][cauda.valor.y].definirEstado(EstadoCelula.VAZIO);
+            dados.celulas[cauda.valor.x][cauda.valor.y].definirEstado(EstadoCelula.VAZIO);
             lista.removerInicio();
         }
         
