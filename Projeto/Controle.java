@@ -15,11 +15,10 @@ public class Controle{
     
     private int tamanhoMatriz;
     private int tamanhoCobra;
+    private Celula[][] celulas;
     
     public Controle(ListaDuplamenteLigada lista){
         this.lista = lista;
-        this.tamanhoMatriz = tamanhoMatriz;
-        this.tamanhoCobra = tamanhoCobra;
     }
     
     public void setup(int tamanhoMatriz, int tamanhoCobra){
@@ -31,12 +30,12 @@ public class Controle{
             }
         }
         
-        logica = new Logica(lista);
-        
-        display = new Display(lista, tamanhoMatriz);
-        display.setup();
-        
         this.tamanhoMatriz = tamanhoMatriz;
         this.tamanhoCobra = tamanhoCobra;
+        this.celulas = new Celula[tamanhoMatriz][tamanhoMatriz];
+        
+        logica = new Logica(lista, celulas);
+        display = new Display(lista, tamanhoMatriz, celulas);
+        display.setup();
     }
 }

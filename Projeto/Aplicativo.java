@@ -17,10 +17,10 @@ public class Aplicativo{
     // private static Scanner scanner = new Scanner(System.in);
     
     public static void main(String args[]){
-        int tamanhoMatriz = 10;
-        int tamanhoCobra = 5;
+        int tamanhoMatrizInicial = 10;
+        int tamanhoCobraInicial = 5;
         
         controle = new Controle(lista);
-        controle.setup(tamanhoMatriz, tamanhoCobra);
+        controle.setup(tamanhoMatrizInicial, tamanhoCobraInicial);
     }
 }

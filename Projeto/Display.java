@@ -24,17 +24,16 @@ public class Display implements KeyListener{
     private JPanel matrizCelulas;
     
     private JPanel painelInformacoes;
-    
-    private JFrame janelaInformacoes;
-    private JPanel informacoesJogo;
+    // private JFrame janelaInformacoes;
+    // private JPanel informacoesJogo;
     private JLabel tamanhoMatrizLabel;
     private JLabel tamanhoCobraLabel;
     private JLabel celulasVaziasLabel;
     
-    public Display(ListaDuplamenteLigada lista, int tamanho){
+    public Display(ListaDuplamenteLigada lista, int tamanho, Celula[][] celulas){
         this.lista = lista;
         this.tamanho = tamanho;
-        this.celulas = new Celula[tamanho][tamanho];
+        this.celulas = celulas;
     }
     
     public void setup(){
@@ -163,7 +162,7 @@ public class Display implements KeyListener{
             // int R = (int)(255 + t * (0 - 255));
             // int G = (int)(255 + t * (100 - 255));
             
-            System.out.println("(" + R + ", " + G + ", " + B + ")");
+            // System.out.println("(" + R + ", " + G + ", " + B + ")");
             
             celulas[noAtual.valor.x][noAtual.valor.y].definirCor(new Vector3(R, G, B));
             noAtual = noAtual.proximo;
