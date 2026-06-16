@@ -56,6 +56,12 @@ public class ListaDuplamenteLigada<Tipo>{
         System.out.print("]");
     }
     
+    public void esvaziarLista(){
+        this.inicio = null;
+        this.fim = null;
+        this.tamanho = 0;
+    }
+    
     public void adicionarInicio(Tipo valor){
         No<Tipo> novoNo = new No<>(valor);
         

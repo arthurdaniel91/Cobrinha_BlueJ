@@ -5,6 +5,7 @@ import javax.swing.JButton;
 import javax.swing.JTextField;
 import javax.swing.BoxLayout;
 import javax.swing.SpringLayout;
+import javax.swing.JOptionPane;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridLayout;
@@ -41,7 +42,7 @@ public class Display{
     private JLabel celulasVaziasLabel;
     public JButton botaoConfigurar;
     
-    private JFrame janelaConfigurar;
+    public JFrame janelaConfigurar;
     
     private JPanel painelConfigurar;
     private JLabel tamanhoMatrizConfigurarLabel;
@@ -64,14 +65,42 @@ public class Display{
     }
     
     public void setup(){
-        if (painelMatriz != null){
-            painelMatriz.removeAll();
-        }
-        
-        janelaPrincipal = new JFrame("Snake");
+        janelaPrincipal = new JFrame("Jogo da cobrinha");
         janelaPrincipal.setSize(1200, 800);
         janelaPrincipal.setLocationRelativeTo(null);
         janelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
+        if (painelInformacoes != null){
+            atualizarInformacoes();
+            
+        } else {
+            formarInformacoes();
+        }
+        
+        formarMatriz();
+        
+        JLabel labelCelula;
+        
+        for (int x = 0; x < dados.tamanhoMatriz; x++){
+            for (int y = 0; y < dados.tamanhoMatriz; y++){
+                labelCelula = new JLabel();
+                labelCelula.setOpaque(true);
+                matrizCelulas.add(labelCelula);
+                
+                dados.celulas[x][y].label = labelCelula;
+            }
+        }
+        
+        painelMatriz.revalidate();
+        painelMatriz.repaint();
+        
+        janelaPrincipal.setVisible(true);
+    }
+    
+    public void formarMatriz(){
+        if (painelMatriz != null){
+            painelMatriz.removeAll();
+        }
         
         painelMatriz = new JPanel();
         painelMatriz.setLayout(new GridBagLayout());
@@ -89,6 +118,11 @@ public class Display{
         matrizCelulas.setMaximumSize(new Dimension(800, 800));
         painelMatriz.add(matrizCelulas, constraints);
         
+        painelMatriz.revalidate();
+        painelMatriz.repaint();
+    }
+    
+    public void formarInformacoes(){
         painelInformacoes = new JPanel();
         painelInformacoes.setLayout(new BoxLayout(painelInformacoes, BoxLayout.Y_AXIS));
         painelInformacoes.setPreferredSize(new Dimension(400, 800));
@@ -126,23 +160,6 @@ public class Display{
         botaoConfigurar.setAlignmentX(Component.CENTER_ALIGNMENT);
         botaoConfigurar.setFocusable(false);
         painelInformacoes.add(botaoConfigurar);
-        
-        JLabel labelCelula;
-        
-        for (int x = 0; x < dados.tamanhoMatriz; x++){
-            for (int y = 0; y < dados.tamanhoMatriz; y++){
-                labelCelula = new JLabel();
-                labelCelula.setOpaque(true);
-                matrizCelulas.add(labelCelula);
-                
-                dados.celulas[x][y].label = labelCelula;
-            }
-        }
-        
-        painelMatriz.revalidate();
-        painelMatriz.repaint();
-        
-        janelaPrincipal.setVisible(true);
     }
     
     public void desenharMatriz(){
@@ -274,13 +291,10 @@ public class Display{
         botaoConfirmar.setFont(botaoConfirmar.getFont().deriveFont(36.0f));
         layout.putConstraint(SpringLayout.WEST, botaoConfirmar, 0, SpringLayout.WEST, corComidaConfigurarLabel);
         layout.putConstraint(SpringLayout.NORTH, botaoConfirmar, 100, SpringLayout.NORTH, corComidaConfigurarLabel);
+        botaoConfirmar.setFocusable(false);
         painelConfigurar.add(botaoConfirmar);
         
         janelaConfigurar.setVisible(true);
-    }
-    
-    public void fecharMenuConfiguracoes(){
-        janelaConfigurar.dispose();
     }
     
     public void atualizarInformacoes(){
@@ -297,6 +311,10 @@ public class Display{
         tamanhoMatrizLabel.setText("Tamanho matriz: " + dados.tamanhoMatriz + " x " + dados.tamanhoMatriz);
         tamanhoCobraLabel.setText("Tamanho cobra: " + lista.tamanho);
         celulasVaziasLabel.setText("Celulas vazias: " + dados.celulasVazias);
+    }
+    
+    public void mostrarMensagem(String mensagem){
+        JOptionPane.showMessageDialog(null, mensagem);
     }
     
     private int interpolacaoLinear(int a, int b, double t){

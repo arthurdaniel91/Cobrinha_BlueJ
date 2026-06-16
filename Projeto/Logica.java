@@ -66,7 +66,7 @@ public class Logica{
                 
             } else {
                 if (novaPosicao.x == pescoco.valor.x && novaPosicao.y == pescoco.valor.y){
-                    System.out.println("Pescoço");
+                    // System.out.println("Pescoço");
                 }
                 
                 return;
