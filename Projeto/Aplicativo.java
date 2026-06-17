@@ -15,9 +15,9 @@ public class Aplicativo{
     private static Controle controle;
     
     public static void main(String args[]){
-        dados.tamanhoMatriz = 10; //Padrão: 10
-        dados.tamanhoCobra = 5; //Padrão: 5
-        dados.pontuacao = 0; //Padrão: 0
+        dados.tamanhoMatriz = 20; //Padrão: 20
+        dados.pontuacaoTotal = 0; //Padrão: 0
+        dados.movimentosTotais = 0; //Padrão: 0
         
         dados.corVazio = new Vector3(150, 150, 150); //Padrão: 150, 150, 150
         dados.corParede = new Vector3(0, 0, 0); //Padrão: 0, 0, 0

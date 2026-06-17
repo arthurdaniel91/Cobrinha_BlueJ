@@ -51,7 +51,7 @@ public class Logica{
         sortearComida();
     }
     
-    public boolean movimentarCobra(Vector2 direcao){
+    public void movimentarCobra(Vector2 direcao){
         No<Vector2> cabeca = lista.fim;
         No<Vector2> pescoco = lista.fim.anterior;
         No<Vector2> cauda = lista.inicio;
@@ -66,11 +66,11 @@ public class Logica{
                 
             } else {
                 if (novaPosicao.x == pescoco.valor.x && novaPosicao.y == pescoco.valor.y){
-                    return false;
-                    
+                    return;
                 }
                 
-                return true;
+                dados.jogadorVivo = false;
+                return;
             }
             
         } else if (dados.celulas[novaPosicao.x][novaPosicao.y].estado == EstadoCelula.COMIDA){
@@ -82,6 +82,7 @@ public class Logica{
         
         if (obteveComida){
             dados.pontuacao++;
+            dados.pontuacaoTotal++;
             
             sortearComida();
             
@@ -93,7 +94,8 @@ public class Logica{
             lista.removerInicio();
         }
         
-        return false;
+        dados.movimentos++;
+        dados.movimentosTotais++;
     }
     
     public void sortearComida(){
@@ -109,9 +111,9 @@ public class Logica{
         dados.celulasVazias = posicoesVazias.tamanho;
         
         if (dados.celulasVazias <= 0){
-            System.out.println("Jogador venceu, encerrando jogo.");
+            dados.jogadorVenceu = true;
             
-            System.exit(0);
+            return;
         }
         
         int numeroAleatorio = random.nextInt(posicoesVazias.tamanho);

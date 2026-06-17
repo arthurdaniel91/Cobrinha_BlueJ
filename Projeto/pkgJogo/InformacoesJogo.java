@@ -9,12 +9,14 @@ import pkgVector.Vector3;
  */
 
 public class InformacoesJogo{
-    public boolean jogoRodando;
     public boolean jogadorVivo;
+    public boolean jogadorVenceu;
+    public int pontuacaoTotal;
+    public int movimentosTotais;
     
     public int tamanhoMatriz;
-    public int tamanhoCobra;
     public int pontuacao;
+    public int movimentos;
     
     public Celula[][] celulas;
     public int celulasVazias;

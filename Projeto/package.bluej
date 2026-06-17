@@ -1,12 +1,12 @@
 #BlueJ package file
-dependency1.from=Aplicativo
-dependency1.to=Controle
+dependency1.from=Controle
+dependency1.to=Logica
 dependency1.type=UsesDependency
 dependency2.from=Controle
-dependency2.to=Logica
+dependency2.to=Display
 dependency2.type=UsesDependency
-dependency3.from=Controle
-dependency3.to=Display
+dependency3.from=Aplicativo
+dependency3.to=Controle
 dependency3.type=UsesDependency
 editor.fx.0.height=1056
 editor.fx.0.width=1936
