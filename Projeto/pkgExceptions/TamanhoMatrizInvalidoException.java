@@ -1,13 +1,19 @@
 package pkgExceptions;
 
 /**
- * Escreva uma descrição da classe TamanhoMatrizInvalidoException aqui.
+ * Exceção customizada para tamanho de matriz invalido.
  * 
- * @author (seu nome) 
- * @version (um número da versão ou uma data)
+ * @author Arthur Daniel, Arthur Oliveira, João Paulo
+ * @version 2026/06/16 (YYYY/MM/DD)
  */
 
 public class TamanhoMatrizInvalidoException extends Exception{
+    /**
+     * Construtor de classe.
+     * 
+     * @param mensagem (String) Mensagem a ser compartilhada através da exceção.
+     */
+    
     public TamanhoMatrizInvalidoException(String mensagem){
         super(mensagem);
     }

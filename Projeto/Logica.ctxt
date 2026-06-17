@@ -1,12 +1,16 @@
 #BlueJ class context
 comment0.target=Logica
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Logica\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
+comment0.text=\r\n\ Classe\ que\ controla\ a\ l\u00F3gica\ do\ jogo.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\ \r\n\ @version\ 2026/06/17\ (YYYY/MM/DD)\r\n
 comment1.params=lista\ dados
 comment1.target=Logica(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ pkgJogo.InformacoesJogo)
+comment1.text=\r\n\ Construtor\ de\ classe.\r\n\ \r\n\ @param\ lista\ (ListaDuplamenteLigada)\ A\ lista\ a\ ser\ utilizada\ como\ refer\u00EAncia\ para\ a\ cobra.\r\n\ @param\ dados\ (InformacoesJogo)\ Dados\ sobre\ o\ jogo\ atual.\r\n
 comment2.params=
 comment2.target=void\ setup()
+comment2.text=\r\n\ Inicializa\ a\ l\u00F3gica\ do\ jogo.\r\n
 comment3.params=direcao
 comment3.target=void\ movimentarCobra(pkgVector.Vector2)
+comment3.text=\r\n\ Movimenta\ a\ cobra\ de\ acordo\ com\ a\ dire\u00E7\u00E3o\ indicada.\r\n\ \r\n\ @param\ direcao\ (Vector2)\ A\ dire\u00E7\u00E3o\ na\ qual\ a\ cobra\ ir\u00E1\ andar.\r\n
 comment4.params=
 comment4.target=void\ sortearComida()
+comment4.text=\r\n\ Sorteia\ uma\ nova\ posi\u00E7\u00E3o\ para\ comida,\ encerrando\ o\ jogo\ se\ n\u00E3o\ houver\ uma\ posi\u00E7\u00E3o\ disponivel.\r\n
 numComments=5

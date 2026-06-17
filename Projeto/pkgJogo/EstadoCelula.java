@@ -1,14 +1,15 @@
 package pkgJogo;
 
 /**
- * Enumeração Banana - escreva a descrição da enumeração aqui
+ * Classe enumeradora para os estados possíveis das celulas na matriz.
  * 
- * @author (seu nome aqui)
- * @version (número da versão ou data aqui)
+ * @author Arthur Daniel, Arthur Oliveira, João Paulo
+ * @version 2026/06/03 (YYYY/MM/DD)
  */
+
 public enum EstadoCelula{
-    VAZIO,
-    PAREDE,
-    COMIDA,
-    COBRA,
+    /***Celula vazia */ VAZIO,
+    /***Celula parede */ PAREDE,
+    /***Celula comida */ COMIDA,
+    /***Celula cobra */ COBRA,
 }

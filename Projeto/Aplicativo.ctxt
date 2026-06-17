@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=Aplicativo
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Aplicativo\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
+comment0.text=\r\n\ Classe\ principal\ do\ programa.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\r\n\ @version\ 2026/06/17\ (YYYY/MM/DD)\r\n
 comment1.params=args
 comment1.target=void\ main(java.lang.String[])
+comment1.text=\r\n\ Fun\u00E7\u00E3o\ principal\ do\ programa.\r\n
 numComments=2

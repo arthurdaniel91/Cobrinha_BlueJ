@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=CorInvalidaException
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ CorInvalidaException\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
+comment0.text=\r\n\ Exce\u00E7\u00E3o\ customizada\ para\ cores\ invalidas.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\r\n\ @version\ 2026/06/16\ (YYYY/MM/DD)\r\n
 comment1.params=mensagem
 comment1.target=CorInvalidaException(java.lang.String)
+comment1.text=\r\n\ Construtor\ de\ classe.\r\n\ \r\n\ @param\ mensagem\ (String)\ Mensagem\ a\ ser\ compartilhada\ atrav\u00E9s\ da\ exce\u00E7\u00E3o.\r\n
 numComments=2

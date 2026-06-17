@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=No
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ No\ aqui.\r\n\ \r\n\ @author\ Arthur\ Daniel\ \r\n\ @version\ 2026/06/02\ (YYYY/MM/DD)\r\n
+comment0.text=\r\n\ Classe\ contendo\ os\ atributos\ principais\ em\ uma\ lista\ duplamente\ ligada.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\r\n\ @version\ 2026/06/02\ (YYYY/MM/DD)\r\n
 comment1.params=valor
 comment1.target=No(java.lang.Object)
+comment1.text=\r\n\ Constutor\ de\ classe.\r\n\ \r\n\ @param\ valor\ (Tipo)\ O\ valor\ a\ ser\ guardado\ no\ n\u00F3.\r\n
 numComments=2

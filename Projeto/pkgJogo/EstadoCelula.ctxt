@@ -1,4 +1,4 @@
 #BlueJ class context
 comment0.target=EstadoCelula
-comment0.text=\r\n\ Enumera\u00E7\u00E3o\ Banana\ -\ escreva\ a\ descri\u00E7\u00E3o\ da\ enumera\u00E7\u00E3o\ aqui\r\n\ \r\n\ @author\ (seu\ nome\ aqui)\r\n\ @version\ (n\u00FAmero\ da\ vers\u00E3o\ ou\ data\ aqui)\r\n
+comment0.text=\r\n\ Classe\ enumeradora\ para\ os\ estados\ poss\u00EDveis\ das\ celulas\ na\ matriz.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\r\n\ @version\ 2026/06/03\ (YYYY/MM/DD)\r\n
 numComments=1

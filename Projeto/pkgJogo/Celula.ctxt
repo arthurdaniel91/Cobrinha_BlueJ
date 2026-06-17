@@ -1,8 +1,10 @@
 #BlueJ class context
 comment0.target=Celula
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Espaco\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
-comment1.params=x\ y\ estado
-comment1.target=Celula(int,\ int,\ EstadoCelula)
+comment0.text=\r\n\ Classe\ contendo\ os\ atributos\ e\ m\u00E9todos\ que\ representam\ e\ controlam\ as\ celulas\ na\ matriz.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\r\n\ @version\ 2026/06/03\ (YYYY/MM/DD)\r\n
+comment1.params=estado
+comment1.target=Celula(EstadoCelula)
+comment1.text=\r\n\ Construtor\ de\ classe\r\n\ \r\n\ @param\ estado\ (EstadoCelula)\ Enum\ representando\ o\ estado\ atual\ da\ c\u00E9lula\ na\ matriz.\r\n
 comment2.params=
 comment2.target=void\ aplicarCor()
+comment2.text=\r\n\ Define\ a\ cor\ do\ label\ da\ celula\ a\ partir\ da\ cor\ armazenada.\r\n
 numComments=3

@@ -1,6 +1,7 @@
 #BlueJ class context
 comment0.target=Vector3
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Vector3\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
+comment0.text=\r\n\ Classe\ contendo\ os\ atributos\ de\ um\ Vector3\ utilizado\ pelo\ programa.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\r\n\ @version\ 2026/06/02\ (YYYY/MM/DD)\r\n
 comment1.params=x\ y\ z
 comment1.target=Vector3(int,\ int,\ int)
+comment1.text=\r\n\ Construtor\ de\ classe.\r\n\ \r\n\ @param\ x\ (Int)\ Valor\ X\ do\ Vector3.\r\n\ @param\ y\ (Int)\ Valor\ Y\ do\ Vector3.\r\n\ @param\ z\ (Int)\ Valor\ Z\ do\ Vector3.\r\n
 numComments=2

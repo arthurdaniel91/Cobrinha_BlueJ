@@ -1,12 +1,19 @@
 package pkgExceptions;
 
 /**
- * Escreva uma descrição da classe CorInvalidaException aqui.
+ * Exceção customizada para cores invalidas.
  * 
- * @author (seu nome) 
- * @version (um número da versão ou uma data)
+ * @author Arthur Daniel, Arthur Oliveira, João Paulo
+ * @version 2026/06/16 (YYYY/MM/DD)
  */
+
 public class CorInvalidaException extends Exception{
+    /**
+     * Construtor de classe.
+     * 
+     * @param mensagem (String) Mensagem a ser compartilhada através da exceção.
+     */
+    
     public CorInvalidaException(String mensagem){
         super(mensagem);
     }

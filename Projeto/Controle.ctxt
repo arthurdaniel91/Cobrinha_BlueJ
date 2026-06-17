@@ -1,18 +1,25 @@
 #BlueJ class context
 comment0.target=Controle
-comment0.text=\r\n\ Escreva\ uma\ descri\u00E7\u00E3o\ da\ classe\ Controle\ aqui.\r\n\ \r\n\ @author\ (seu\ nome)\ \r\n\ @version\ (um\ n\u00FAmero\ da\ vers\u00E3o\ ou\ uma\ data)\r\n
+comment0.text=\r\n\ Classe\ que\ controla\ o\ comportamento\ do\ jogo\ e\ da\ interface\ do\ programa.\r\n\ \r\n\ @author\ Arthur\ Daniel,\ Arthur\ Oliveira,\ Jo\u00E3o\ Paulo\ \r\n\ @version\ 2026/06/17\ (YYYY/MM/DD)\r\n
 comment1.params=lista\ dados
 comment1.target=Controle(pkgListaDuplamenteLigada.ListaDuplamenteLigada,\ pkgJogo.InformacoesJogo)
+comment1.text=\r\n\ Construtor\ de\ classe.\r\n\ \r\n\ @param\ lista\ (ListaDuplamenteLigada)\ A\ lista\ a\ ser\ utilizada\ como\ refer\u00EAncia\ para\ a\ cobra.\r\n\ @param\ dados\ (InformacoesJogo)\ Dados\ sobre\ o\ jogo\ atual.\r\n
 comment2.params=
 comment2.target=void\ setup()
+comment2.text=\r\n\ Inicializa\ o\ jogo\ com\ as\ condi\u00E7\u00F5es\ iniciais\ declaradas.\r\n
 comment3.params=
 comment3.target=void\ abrirMenuConfiguracoes()
+comment3.text=\r\n\ Abre\ o\ menu\ configura\u00E7\u00F5es\ ao\ apertar\ no\ bot\u00E3o\ configurar.\r\n
 comment4.params=
 comment4.target=void\ validarConfiguracoes()
+comment4.text=\r\n\ Processo\ de\ valida\u00E7\u00E3o\ para\ as\ configura\u00E7\u00F5es\ inseridas\ pelo\ usu\u00E1rio.\r\n
 comment5.params=tecla
 comment5.target=void\ keyPressed(java.awt.event.KeyEvent)
+comment5.text=\r\n\ Evento\ de\ entrada\ por\ teclado.\r\n
 comment6.params=tecla
 comment6.target=void\ keyReleased(java.awt.event.KeyEvent)
+comment6.text=\r\n\ Evento\ de\ saida\ por\ teclado.\r\n
 comment7.params=tecla
 comment7.target=void\ keyTyped(java.awt.event.KeyEvent)
+comment7.text=\r\n\ Evento\ de\ entrada\ por\ teclado\ em\ campo\ de\ digita\u00E7\u00E3o.\r\n
 numComments=8

@@ -2,13 +2,14 @@ package pkgJogo;
 import pkgVector.Vector3;
 
 /**
- * Escreva uma descrição da classe InformacoesJogo aqui.
+ * Classe contendo os atributos que representam o estado atual do jogo.
  * 
- * @author (seu nome) 
- * @version (um número da versão ou uma data)
+ * @author Arthur Daniel, Arthur Oliveira, João Paulo
+ * @version 2026/06/16 (YYYY/MM/DD)
  */
 
 public class InformacoesJogo{
+    //Atributos principais.
     public boolean jogadorVivo;
     public boolean jogadorVenceu;
     public int pontuacaoTotal;

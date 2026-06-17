@@ -19,16 +19,18 @@ import pkgVector.*;
 import pkgJogo.*;
 
 /**
- * Escreva uma descrição da classe Display aqui.
+ * Classe que controla a interface do programa.
  * 
- * @author (seu nome) 
- * @version (um número da versão ou uma data)
+ * @author Arthur Daniel, Arthur Oliveira, João Paulo 
+ * @version 2026/06/17 (YYYY/MM/DD)
  */
 
 public class Display{
+    //Declaração de classes.
     private ListaDuplamenteLigada<Vector2> lista;
     private InformacoesJogo dados;
     
+    //Atributos principais.
     public JFrame janelaPrincipal;
     
     private JPanel painelMatriz;
@@ -61,52 +63,78 @@ public class Display{
     private JLabel observacaoRGBConfigurarLabel;
     public JButton botaoConfirmar;
     
+    /**
+     * Construtor de classe.
+     * 
+     * @param lista (ListaDuplamenteLigada) A lista a ser utilizada como referência para a cobra.
+     * @param dados (InformacoesJogo) Dados sobre o jogo atual.
+     */
+    
     public Display(ListaDuplamenteLigada lista, InformacoesJogo dados){
         this.lista = lista;
         this.dados = dados;
     }
     
+    /**
+     * Inicializa a interface do programa.
+     */
+    
     public void setup(){
+        //Cria a janela principal com suas respectivas propriedades.
         janelaPrincipal = new JFrame("Jogo da cobrinha");
         janelaPrincipal.setSize(1200, 800);
         janelaPrincipal.setLocationRelativeTo(null);
         janelaPrincipal.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
+        //Forma os paineis que compoem a interface principal.
         formarInformacoes();
         formarMatriz();
         
+        //Variável auxiliar para a JLabel da celula.
         JLabel labelCelula;
         
+        //Varre a matriz.
         for (int x = 0; x < dados.tamanhoMatriz; x++){
             for (int y = 0; y < dados.tamanhoMatriz; y++){
+                //Cria a label da celula na coordenada atual com suas respectivas propriedades.
                 labelCelula = new JLabel();
                 labelCelula.setOpaque(true);
                 matrizCelulas.add(labelCelula);
                 
+                //Define a label para a celula na coordenada atual como a label recem-criada.
                 dados.celulas[x][y].label = labelCelula;
             }
         }
         
-        painelMatriz.revalidate();
-        painelMatriz.repaint();
+        // //Revalida o painel matriz.
+        // painelMatriz.revalidate();
+        // painelMatriz.repaint();
         
+        //Deixa a janela principal visivel.
         janelaPrincipal.setVisible(true);
     }
     
+    /**
+     * Cria o painel que compoem a matriz do jogo.
+     */
+    
     public void formarMatriz(){
-        if (painelMatriz != null){
-            painelMatriz.removeAll();
-        }
+        // if (painelMatriz != null){
+            // painelMatriz.removeAll();
+        // }
         
+        //Cria um novo painel para a matriz com suas respectivas propriedades.
         painelMatriz = new JPanel();
         painelMatriz.setLayout(new GridBagLayout());
         janelaPrincipal.add(painelMatriz);
         
+        //Limitações e posicionamento dos elementos do painel.
         GridBagConstraints constraints = new GridBagConstraints();
         constraints.anchor = GridBagConstraints.WEST;
         constraints.weightx = 1.0;
         constraints.weighty = 1.0;
         
+        //Cria o painel que contem a matriz com suas respectivas propriedades.
         matrizCelulas = new JPanel();
         matrizCelulas.setLayout(new GridLayout(dados.tamanhoMatriz, dados.tamanhoMatriz));
         matrizCelulas.setPreferredSize(new Dimension(800, 800));
@@ -114,11 +142,16 @@ public class Display{
         matrizCelulas.setMaximumSize(new Dimension(800, 800));
         painelMatriz.add(matrizCelulas, constraints);
         
-        painelMatriz.revalidate();
-        painelMatriz.repaint();
+        // painelMatriz.revalidate();
+        // painelMatriz.repaint();
     }
     
+    /**
+     * Cria o painel que mostra as informacoes do jogo.
+     */
+    
     public void formarInformacoes(){
+        //Cria um novo painel para conter as informacoes do jogo junto de suas respectivas propriedades.
         painelInformacoes = new JPanel();
         painelInformacoes.setLayout(new BoxLayout(painelInformacoes, BoxLayout.Y_AXIS));
         painelInformacoes.setPreferredSize(new Dimension(400, 800));
@@ -127,6 +160,7 @@ public class Display{
         painelInformacoes.setBackground(Color.LIGHT_GRAY);
         janelaPrincipal.add(painelInformacoes, BorderLayout.EAST);
         
+        //Criação e posicionamento dos labels que compõem esse painel.
         informacaoJogadorLabel = new JLabel();
         informacaoJogadorLabel.setFont(informacaoJogadorLabel.getFont().deriveFont(36.0f));
         informacaoJogadorLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -163,35 +197,50 @@ public class Display{
         botaoConfigurar.setFocusable(false);
         painelInformacoes.add(botaoConfigurar);
         
+        //Atualiza os labels com as informações respectivas.
         atualizarInformacoes();
     }
     
+    /**
+     * Varre a matriz e pinta as celulas de suas respectivas cores.
+     */
+    
     public void desenharMatriz(){
+        //Variável auxiliar para o nó sendo acessado atualmente.
         No<Vector2> noAtual = lista.inicio;
         
+        //Varre a lista
         for (int i = 0; i < lista.tamanho; i++){
+            //Variável auxiliar da posição a ser buscada em porcentagem.
             double t;
             
+            //Se a lista for unitária, definir porcentagem como 100%.
             if (lista.tamanho == 1){
                 t = 1.0d;
                 
             } else {
+                //Se não, calcular porcentagem baseada na posição atual e quantidade de elementos na lista.
                 t = (double)i / (lista.tamanho - 1);
             }
             
+            //Variáveis auxiliares dos valores de cor RGB interpolados para cada parte do corpo da cobra.
             int R = interpolacaoLinear(dados.corCauda.x, dados.corCabeca.x, t);
             int G = interpolacaoLinear(dados.corCauda.y, dados.corCabeca.y, t);
             int B = interpolacaoLinear(dados.corCauda.z, dados.corCabeca.z, t);
             
+            //Define a cor da celula a partir dos valores calculados e avança para o próximo nó.
             dados.celulas[noAtual.valor.x][noAtual.valor.y].cor = new Vector3(R, G, B);
             noAtual = noAtual.proximo;
         }
         
+        //Varre a matriz
         for (int x = 0; x < dados.tamanhoMatriz; x++){
             for (int y = 0; y < dados.tamanhoMatriz; y++){
+                //Atributos da celula atual.
                 EstadoCelula estadoCelula = dados.celulas[x][y].estado;
                 JLabel bordaCelula = dados.celulas[x][y].label;
                 
+                //Define a cor da celula atual a partir do seu estado.
                 switch(estadoCelula){
                     case VAZIO:
                         dados.celulas[x][y].cor = dados.corVazio;
@@ -209,12 +258,18 @@ public class Display{
                         break;
                 }
                 
+                //Aplica a cor definida para o label da celula.
                 dados.celulas[x][y].aplicarCor();
             }
         }
     }
     
+    /**
+     * Monta a janela configurar ao apertar o botão configurar.
+     */
+    
     public void montarJanelaConfigurar(){
+        //Cria a janela com suas respectivas propriedades.
         janelaConfigurar = new JFrame("Configurações");
         janelaConfigurar.setSize(new Dimension(700, 500));
         
@@ -223,6 +278,7 @@ public class Display{
         painelConfigurar.setLayout(layout);
         janelaConfigurar.add(painelConfigurar);
         
+        //Criação e posicionamento dos labels que compõem o menu configurar.
         tamanhoMatrizConfigurarLabel = new JLabel("Tamanho matriz (8-50): ");
         tamanhoMatrizConfigurarLabel.setFont(tamanhoMatrizConfigurarLabel.getFont().deriveFont(24.0f));
         tamanhoMatrizConfigurar = new JTextField("" + dados.tamanhoMatriz, 15);
@@ -302,25 +358,35 @@ public class Display{
         botaoConfirmar.setFocusable(false);
         painelConfigurar.add(botaoConfirmar);
         
+        //Deixa a janela visivel.
         janelaConfigurar.setVisible(true);
     }
     
+    /**
+     * Atualiza as informações mostradas de acordo com o estado atual do jogo.
+     */
+    
     public void atualizarInformacoes(){
+        //Se o jogador estiver vivo.
         if (dados.jogadorVivo == true){
+            //Se o jogador venceu o jogo, mudar texto para mostrar vitória.
             if (dados.jogadorVenceu == true){
                 informacaoJogadorLabel.setText("<html><center>Jogador venceu, pressione R para começar novo jogo.</center><html>");
                 informacaoJogadorLabel.setForeground(Color.CYAN);
                 
             } else {
+                //Se não, mudar texto para mostrar que o jogador está vivo.
                 informacaoJogadorLabel.setText("Jogador vivo");
                 informacaoJogadorLabel.setForeground(Color.GREEN);
             }
             
+        //Se não, mudar texto para mostrar que o jogador está morto.
         } else {
             informacaoJogadorLabel.setText("<html><center>Jogador morto, pressione R para reiniciar.</center></html>");
             informacaoJogadorLabel.setForeground(Color.RED);
         }
         
+        //Atualiza os outros labels com as informações relevantes.
         pontuacaoLabel.setText("Pontuacao: " + dados.pontuacao + " (" + dados.pontuacaoTotal + " total)");
         movimentosLabel.setText("Movimentos: " + dados.movimentos + " (" + dados.movimentosTotais + " totais)");
         tamanhoMatrizLabel.setText("Tamanho matriz: " + dados.tamanhoMatriz + " x " + dados.tamanhoMatriz);
@@ -328,11 +394,27 @@ public class Display{
         celulasVaziasLabel.setText("Celulas vazias: " + dados.celulasVazias);
     }
     
+    /**
+     * Mostra uma mensagem na tela.
+     * 
+     * @param mensagem (String) A mensagem a ser mostrada.
+     */
+    
     public void mostrarMensagem(String mensagem){
+        //Mostra a mensagem na tela.
         JOptionPane.showMessageDialog(null, mensagem);
     }
     
+    /**
+     * Obtem o valor entre dois numeros a partir de uma porcentagem (0 a 1)
+     * 
+     * @param a (Int) Valor minimo.
+     * @param b (Int) Valor máximo.
+     * @param t (Double) Porcentagem do valor a ser obtido.
+     */
+    
     private int interpolacaoLinear(int a, int b, double t){
+        //Calcula e retorna o número entre A e B a partir de t.
         return (int)(a + (b - a) * t);
     }
 }
